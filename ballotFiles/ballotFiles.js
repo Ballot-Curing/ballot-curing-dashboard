@@ -40,6 +40,7 @@ $(document).ready(function () {
 
   $("#enterBtn").on("click", function () {
     state_val = $("#dropdownState").text();
+    console.log($('#dropdownState').html());
     election_val = $("#dropdownElection").text();
     county_val = $("#dropdownCounty").text();
     city_val = $("#dropdownCity").text();
@@ -47,17 +48,18 @@ $(document).ready(function () {
     issue_val = $("#dropdownIssue").text();
     console.log(state_val);
     console.log(election_val);
-    console.log(county_val);
-    console.log(city_val);
-    console.log(status_val);
-    console.log(issue_val);
+    // console.log(county_val);
+    // console.log(city_val);
+    // console.log(status_val);
+    // console.log(issue_val);
 
+    // , county: county_val, city: city_val, ballot_rtn_status: status_val, ballot_issue: issue_val
     $("#table").show();
     $.ajax({
       type: 'GET',
       url: 'http://128.220.221.36:5500/api/v1/ballots/',
       dataType: 'json',
-      data: { state: state_val, election_dt: election_val, county: county_val, city: city_val, ballot_rtn_status: status_val, ballot_issue: issue_val },
+      data: { state: state_val, election_dt: election_val },
       success: function (response) {
         console.log(response);
         $.each(response, function (i, item) {
@@ -78,6 +80,19 @@ $(document).ready(function () {
       }
     });
     $("#downloadBtn").show();
+
+  });
+
+
+
+  $("#clearBtn").on("click", function () {
+    $('#dropdownState').val(0);
+    $('#dropdownState').html('Select State');
+    $('#dropdownElection').val(0);
+    $('#dropdownElection').html('Select Election');
+    $("#downloadBtn").hide();
+    $("#table tbody").empty();
+    $("#table").hide();
 
   });
 
