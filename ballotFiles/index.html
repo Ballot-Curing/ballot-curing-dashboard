@@ -31,7 +31,7 @@
                 aria-haspopup="true" aria-expanded="false">
                 Select State
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu" id="dropdownMenuState" aria-labelledby="dropdownMenuButton">
                 <li><a class="dropdown-item" data-value="1" href="#">GA</a></li>
                 <li><a class="dropdown-item" data-value="2" href="#">NC</a></li>
             </div>
@@ -74,60 +74,52 @@
 
     <div class="btn-group mr-10">
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownCounty" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 County
             </button>
-            <div class="dropdown-menu checkbox-menu" aria-labelledby="dropdownMenuButton">
-                <input class="form-control" id="myInput" type="text" placeholder="Search..">
-                <a class="dropdown-item" href="#">
+            <!-- TODO: add checkbox-menu to class to handle multiple inputs -->
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" data-value="1" href="#">Fulton</a></li>
+                <li><a class="dropdown-item" data-value="2" href="#">Gwinnett</a></li>
+                <!-- <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                <li><a class="dropdown-item" data-value="1" href="#">
                     <input type="checkbox"> Fulton
-                </a>
-                <a class="dropdown-item" href="#">
+                </a></li>
+                <li></li><a class="dropdown-item" data-value="2" href="#">
                     <input type="checkbox"> Gwinnett
-                </a>
+                </a></li> -->
             </div>
         </div>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownCity" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 City
             </button>
-            <div class="dropdown-menu checkbox-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">
-                    <input type="checkbox"> Atlanta
-                </a>
-                <a class="dropdown-item" href="#">
-                    <input type="checkbox"> Savannah
-                </a>
+            <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" data-value="1" href="#">Atlanta</a></li>
+                <li><a class="dropdown-item" data-value="2" href="#">Savannah</a></li>
             </div>
         </div>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownStatus" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 Ballot Status
             </button>
-            <div class="dropdown-menu checkbox-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">
-                    <input type="checkbox"> Accepted
-                </a>
-                <a class="dropdown-item" href="#">
-                    <input type="checkbox"> Rejected
-                </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" data-value="1" href="#">A</a></li>
+                <li><a class="dropdown-item" data-value="2" href="#">R</a></li>
             </div>
         </div>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownIssue" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 Ballot Issue
             </button>
             <div class="dropdown-menu checkbox-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">
-                    <input type="checkbox"> Missing Signature
-                </a>
-                <a class="dropdown-item" href="#">
-                    <input type="checkbox"> Invalid Signature
-                </a>
+                <li><a class="dropdown-item" data-value="1" href="#">Missing Signature</a></li>
+                <li><a class="dropdown-item" data-value="2" href="#">Invalid Signature</a></li>
+                <li><a class="dropdown-item" data-value="3" href="#">ID</a></li>
             </div>
         </div>
     </div>
