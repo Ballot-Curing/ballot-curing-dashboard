@@ -46,6 +46,7 @@ $(document).ready(function () {
 
   // Enter Button
   $("#enterBtn").on("click", function () {
+    $("#table tbody").empty();
     state_val = $("#dropdownState").text();
     console.log("HI");
     console.log($("#dropdownElection").val());
