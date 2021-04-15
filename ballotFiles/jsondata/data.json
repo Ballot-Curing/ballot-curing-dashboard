@@ -1,4 +1,16 @@
 {
-    "GA": "01-04-2021",
-    "NC": "11-03-2020"
+    "GA": [
+        {
+            "elections": "01-04-2021, 01-05-2021",
+            "cities": "Atlanta, Savannah"
+        }
+    ],
+    "NC": [
+        {
+            "elections": "11-03-2020",
+            "cities": "Raleigh, Durham"
+        }
+    ]
 }
+
+

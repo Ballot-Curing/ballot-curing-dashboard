@@ -9,13 +9,14 @@ function ajaxRequest(params) {
 function dropdownToggle() {
   // select the main dropdown button element
   var dropdown = $(this).parent().parent().prev();
-  console.log(dropdown.text())
+  //console.log($(this).parent().parent().prev())
 
   // change the CONTENT of the button based on the content of selected option
   dropdown.html($(this).html());
 
   // change the VALUE of the button based on the data-value property of selected option
   dropdown.val($(this).prop('data-value'));
+  console.log(dropdown);
 
   //console.log($("#dropdownState").text());
 
@@ -28,7 +29,57 @@ $(document).ready(function () {
   $("#table tbody").hide();
   $("#downloadBtn").hide();
 
-  $('.dropdown-menu a').on('click', dropdownToggle);
+  $('#mainbody').on('click', '.dropdown-menu a', dropdownToggle);
+
+
+  //$("#dropdownMenuElection").hide();
+  $('#dropdownMenuState a').on('click', function () {
+    console.log($(this).text());
+    selected_state = $(this).text();
+    $.getJSON("jsondata/data.json", function (data) {
+      switch (selected_state) {
+        case 'GA':
+          election_data = data['GA'][0].elections.split(",");
+          city_data = data['GA'][0].cities.split(",");
+          //county_data = data['GA'][0].county.split(",");
+          console.log(city_data);
+          //$("#dropdownMenuElection").empty().append('<li><a class="dropdown-item" data-value="3" value="3" href="#">' + '01-04-2021' + '</a></li>');
+          break;
+        case 'NC':
+          election_data = data['NC'][0].elections.split(",");
+          city_data = data['NC'][0].cities.split(",");
+          console.log(city_data);
+
+
+          //county_data = data['GA'][0].county.split(",");
+
+          //$("#dropdownMenuElection").empty().append('<li><a class="dropdown-item" data-value="3" value="3" href="#">' + '11-03-2021' + '</a></li>');
+          break;
+      }
+     var $election_drop = $("#dropdownMenuElection");
+      $election_drop.empty();
+      $.each(election_data, function(index, value) {
+        $election_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
+      });
+
+      var $city_drop = $("#dropdownMenuCity");
+      $city_drop.empty();
+      $.each(city_data, function(index, value) {
+        $city_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
+      });
+
+
+
+
+
+
+      //$("#dropdownMenuElection").empty().append('<li><a class="dropdown-item" data-value="3" value="3" href="#">' + 'DATE' + '</a></li>');
+      //<li><a class="dropdown-item" data-value="1" href="#">01-04-2021</a></li>
+
+      //$("#dropdownMenuElection").show();
+    });
+  });
+
 
 //   $('#dropdownMenuState a').on('click', function() {
 //     console.log("changed");
@@ -146,6 +197,7 @@ $(document).ready(function () {
     $('#dropdownCity').html('City');
     $('#dropdownStatus').html('Status');
     $('#dropdownIssue').html('Issue');
+    $("#dropdownMenuElection").empty()
     $("#downloadBtn").hide();
     $("#table tbody").empty();
     $("#table tbody").hide();
