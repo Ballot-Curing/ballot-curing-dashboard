@@ -1,6 +1,6 @@
 .stats_card {
   width: 200px; 
-  background-color: rgba(165, 0, 0, 0.1);
+  /* background-color: rgba(165, 0, 0, 0.1); */
 }
 
 .stats_value {
@@ -11,5 +11,5 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  background-color: rgba(0, 44, 165, 0.1);
+  /* background-color: rgba(0, 44, 165, 0.1); */
 }

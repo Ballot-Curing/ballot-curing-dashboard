@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  background-color: rgba(0, 44, 165, 0.1);
+  /* background-color: rgba(0, 44, 165, 0.1); */
   margin-top: 20px;
 }
 

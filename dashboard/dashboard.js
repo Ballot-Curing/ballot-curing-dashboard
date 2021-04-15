@@ -22,16 +22,17 @@ window.onload = function () {
   var donutChart2 = new CanvasJS.Chart("donutChart2Container",
   {
     title:{
-      text: "Today's Processed Data"
+      text: "Rejected by Race"
     },
     data: [
     {
      type: "doughnut",
      dataPoints: [
-     {  y: 80, indexLabel: "Accepted" },
-     {  y: 10, indexLabel: "Rejected" },
-     {  y: 5, indexLabel: "Spoiled" },
-     {  y: 5, indexLabel: "Other" },
+     {  y: 123, indexLabel: "White" },
+     {  y: 123, indexLabel: "Black" },
+     {  y: 123, indexLabel: "Asian" },
+     {  y: 123, indexLabel: "Hispanic" },
+     {  y: 12, indexLabel: "Other" },
      ]
    }
    ]
@@ -42,16 +43,16 @@ window.onload = function () {
   var donutChart3 = new CanvasJS.Chart("donutChart3Container",
   {
     title:{
-      text: "Today's Processed Data"
+      text: "Ballot Issues"
     },
     data: [
     {
      type: "doughnut",
      dataPoints: [
-     {  y: 80, indexLabel: "Accepted" },
-     {  y: 10, indexLabel: "Rejected" },
-     {  y: 5, indexLabel: "Spoiled" },
-     {  y: 5, indexLabel: "Other" },
+     {  y: 123, indexLabel: "Ballot Received after Deadline" },
+     {  y: 42, indexLabel: "Invalid Signature" },
+     {  y: 12, indexLabel: "Missing Signature" },
+     {  y: 10, indexLabel: "Ineligible Elector" },
      ]
    }
    ]
