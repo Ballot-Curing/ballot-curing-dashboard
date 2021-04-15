@@ -49,6 +49,7 @@
   <script src="https://code.highcharts.com/maps/highmaps.js"></script>
   <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
   <script src="https://code.highcharts.com/mapdata/countries/us/us-ga-all.js"></script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 
 <body>
@@ -91,24 +92,36 @@
           <div id="stats"></div>
         </div>
 
+        <!-- Charts -->
+        <div>
+          <h3 class="h3">Charts</h3>
+        </div>
+
+        <div>
+          <div class="donutChartsContainer">
+            <div id="donutChartContainer" class="chart_container"></div>
+            <div id="donutChart2Container" class="chart_container"></div>
+            <div id="donutChart3Container" class="chart_container"></div>
+            <div id="lineChartContainer" class="chart_container"></div>  
+            <div id="lineChart2Container" class="chart_container"></div>  
+          </div>
+          
+          
+        </div>
+        
         <!-- Map -->
+        <div>
+          <h3 class="h3">Maps</h3>
+        </div>
         <div class="map_container">
           <div id="rejected" class="map"></div>
           <div id="accepted" class="map"></div>
           <div id="cured" class="map"></div>
         </div>
 
-
-        <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <canvas class="my-4 w-50 h-50 chartjs-render-monitor" id="lineChart"></canvas>
-          <canvas class="my-4 w-50 h-50 chartjs-render-monitor" id="donutChart"></canvas>
-        </div>
-        
       </main>
     </div>
   </div>
-
-  
 
 <script src="dashboard.js"></script>
 <script src="accepted_map.js"></script> <!-- Georgia Rejected Map -->

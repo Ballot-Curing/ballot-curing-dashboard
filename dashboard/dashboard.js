@@ -1,80 +1,121 @@
-/* globals Chart:false, feather:false */
-
-(function () {
-  'use strict'
-
-  feather.replace()
-
-  // Graphs
-  var ctx = document.getElementById('lineChart')
-  
-
-
-  // eslint-disable-next-line no-unused-vars
-  var lineChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday'
-      ],
-      datasets: [{
-        data: [
-          15339,
-          21345,
-          18483,
-          24003,
-          23489,
-          24092,
-          12034
-        ],
-        lineTension: 0,
-        backgroundColor: 'transparent',
-        borderColor: '#007bff',
-        borderWidth: 4,
-        pointBackgroundColor: '#007bff'
-      }]
+window.onload = function () {
+  var donutChart = new CanvasJS.Chart("donutChartContainer",
+  {
+    title:{
+      text: "Today's Processed Data"
     },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: false
-          }
-        }]
-      },
-      legend: {
-        display: false
-      }
-    }
-  })
+    data: [
+    {
+     type: "doughnut",
+     dataPoints: [
+     {  y: 80, indexLabel: "Accepted" },
+     {  y: 10, indexLabel: "Rejected" },
+     {  y: 5, indexLabel: "Spoiled" },
+     {  y: 5, indexLabel: "Other" },
+     ]
+   }
+   ]
+ });
 
-  var ctx = document.getElementById('donutChart')
-  var donutChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: [
-        'Accepted',
-        'Rejected',
-        'Spoiled',
-        'Other'
-      ],
-      datasets: [{
-        data: [
-          80,
-          10,
-          5,
-          5
-        ],
-        backgroundColor: [
-          'red', 'blue', 'yellow', 'green'
-        ]
-      }]
-    },  options: Chart.defaults.doughnut
-  })
-})()
+  donutChart.render();
+
+  var donutChart2 = new CanvasJS.Chart("donutChart2Container",
+  {
+    title:{
+      text: "Today's Processed Data"
+    },
+    data: [
+    {
+     type: "doughnut",
+     dataPoints: [
+     {  y: 80, indexLabel: "Accepted" },
+     {  y: 10, indexLabel: "Rejected" },
+     {  y: 5, indexLabel: "Spoiled" },
+     {  y: 5, indexLabel: "Other" },
+     ]
+   }
+   ]
+ });
+
+  donutChart2.render();
+
+  var donutChart3 = new CanvasJS.Chart("donutChart3Container",
+  {
+    title:{
+      text: "Today's Processed Data"
+    },
+    data: [
+    {
+     type: "doughnut",
+     dataPoints: [
+     {  y: 80, indexLabel: "Accepted" },
+     {  y: 10, indexLabel: "Rejected" },
+     {  y: 5, indexLabel: "Spoiled" },
+     {  y: 5, indexLabel: "Other" },
+     ]
+   }
+   ]
+ });
+
+  donutChart3.render();
+
+  var chart = new CanvasJS.Chart("lineChartContainer",
+  {
+
+    title:{
+    text: "Cured ballots per day"
+    },
+     data: [
+    {
+      type: "line",
+
+      dataPoints: [
+      { x: new Date(2012, 00, 1), y: 450 },
+      { x: new Date(2012, 01, 1), y: 414 },
+      { x: new Date(2012, 02, 1), y: 520 },
+      { x: new Date(2012, 03, 1), y: 460 },
+      { x: new Date(2012, 04, 1), y: 450 },
+      { x: new Date(2012, 05, 1), y: 500 },
+      { x: new Date(2012, 06, 1), y: 480 },
+      { x: new Date(2012, 07, 1), y: 480 },
+      { x: new Date(2012, 08, 1), y: 410 },
+      { x: new Date(2012, 09, 1), y: 500 },
+      { x: new Date(2012, 10, 1), y: 480 },
+      { x: new Date(2012, 11, 1), y: 510 }
+      ]
+    }
+    ]
+  });
+
+  chart.render();
+
+  var chart = new CanvasJS.Chart("lineChart2Container",
+  {
+
+    title:{
+    text: "Cured ballots per day"
+    },
+     data: [
+    {
+      type: "line",
+
+      dataPoints: [
+      { x: new Date(2012, 00, 1), y: 450 },
+      { x: new Date(2012, 01, 1), y: 414 },
+      { x: new Date(2012, 02, 1), y: 520 },
+      { x: new Date(2012, 03, 1), y: 460 },
+      { x: new Date(2012, 04, 1), y: 450 },
+      { x: new Date(2012, 05, 1), y: 500 },
+      { x: new Date(2012, 06, 1), y: 480 },
+      { x: new Date(2012, 07, 1), y: 480 },
+      { x: new Date(2012, 08, 1), y: 410 },
+      { x: new Date(2012, 09, 1), y: 500 },
+      { x: new Date(2012, 10, 1), y: 480 },
+      { x: new Date(2012, 11, 1), y: 510 }
+      ]
+    }
+    ]
+  });
+
+  chart.render();
+}

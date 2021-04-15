@@ -110,3 +110,14 @@ body {
   text-align: center;
   color: gray;
 }
+
+.donutChartsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgba(0, 44, 165, 0.1);
+}
+
+.chart_container {
+  height: 300px; 
+  width: 500px;
+}

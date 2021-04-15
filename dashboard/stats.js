@@ -19,6 +19,13 @@ request.onload = function () {
             ['Total accepted', stats_data.total_accepted],
             ['Total rejected', stats_data.total_rejected],
             ['Total cured', stats_data.total_cured],
+            ['Total cured', stats_data.total_cured],
+            ['Total cured', stats_data.total_cured],
+            ['Total cured', stats_data.total_cured],
+            ['Total cured', stats_data.total_cured],
+            ['Total cured', stats_data.total_cured],
+            ['Total cured', stats_data.total_cured],
+            ['Total cured', stats_data.total_cured],
           ]
     
           stats.forEach((stat) => {

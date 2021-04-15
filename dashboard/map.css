@@ -3,10 +3,11 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
   background-color: rgba(0, 44, 165, 0.1);
+  margin-top: 20px;
 }
 
 
 .map {
-  height: 300px; 
+  height: 350px; 
   max-width: 400px; 
 }
