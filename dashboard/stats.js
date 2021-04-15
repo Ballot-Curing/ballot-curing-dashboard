@@ -9,44 +9,33 @@ app.appendChild(container)
 var request = new XMLHttpRequest()
  
 // Open a new connection, using the GET request on the URL endpoint
-// request.open('GET', 'https://60663eecb8fbbd0017568315.mockapi.io/api/v1/BallotStats', true)
-
 request.open('GET', 'http://128.220.221.36:3999/api/v1/stats/?state=ga&election_dt=01-04-2021', true)
-request.setRequestHeader("Access-Control-Allow-Headers", "*")
-request.setRequestHeader("Access-Control-Request-Headers", "x-requested-with, content-type")
-request.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE")
-request.setRequestHeader("Access-Control-Max-Age", "3600")
-
 
 
 request.onload = function () {
-    var data = JSON.parse(this.response)
+    var stats_data = JSON.parse(this.response)
     if (request.status >= 200 && request.status < 400) {
-        data.forEach((stats_data) => {
-          stats = [
-            ['Total accepted', stats_data.total_accepted],
-            ['Total rejected', stats_data.total_rejected],
-            ['Total cured', stats_data.total_cured],
-            ['Total cured', stats_data.total_cured],
-            ['Total cured', stats_data.total_cured],
-            ['Total cured', stats_data.total_cured],
-            ['Total cured', stats_data.total_cured],
-            ['Total cured', stats_data.total_cured],
-            ['Total cured', stats_data.total_cured],
-            ['Total cured', stats_data.total_cured],
-          ]
-    
-          stats.forEach((stat) => {
-            const card = document.createElement('div')
-            card.setAttribute('class', 'stats_card')
-            container.appendChild(card)
-            create_stat(card, stat[0], stat[1])
-          })
+      stats = [
+        ['Total accepted', stats_data.total_accepted],
+        ['Total rejected', stats_data.total_rejected],
+        ['Total cured', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
 
-        })
-      } else {
-        console.log('error')
-      }
+      ]
+
+      stats.forEach((stat) => {
+        const card = document.createElement('div')
+        card.setAttribute('class', 'stats_card')
+        container.appendChild(card)
+        create_stat(card, stat[0], stat[1])
+      })
+
+    } else {
+      console.log('error')
+    }
 }
 
 function create_stat(card, stat_name, stat_value) {
@@ -58,6 +47,7 @@ function create_stat(card, stat_name, stat_value) {
   card.appendChild(name)
   card.appendChild(stats_value)
 }
+
 
 // Send request
 request.send()

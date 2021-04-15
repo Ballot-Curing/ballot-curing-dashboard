@@ -1,8 +1,6 @@
 // This data will be given by API
 var data = [
-  {'name': "Walker", "value": 1},
-  {'name': "Fulton", "value": 2},
-  {'name': "Taylor", "value": 3},
+
 ];
 
 // Create the chart
