@@ -1,7 +1,7 @@
 const app = document.getElementById('stats')
 
 const container = document.createElement('div')
-container.setAttribute('class', 'container')
+container.setAttribute('class', 'flex_container')
 
 app.appendChild(container)
 
@@ -16,23 +16,34 @@ request.onload = function () {
 
     var data = JSON.parse(this.response)
     if (request.status >= 200 && request.status < 400) {
-        data.forEach((stat) => {
+        data.forEach((stats_data) => {
+          stats = [
+            ['Total accepted', stats_data.total_accepted],
+            ['Total rejected', stats_data.total_rejected],
+            ['Total cured', stats_data.total_cured],
+          ]
+    
+          stats.forEach((stat) => {
             const card = document.createElement('div')
-            card.setAttribute('class', 'card')
-
-            const h1 = document.createElement('h1')
-            h1.textContent = 'Total Accepted'
-
-            const p = document.createElement('p')
-            p.textContent = stat.total_accepted
-
+            card.setAttribute('class', 'stats_card')
             container.appendChild(card)
-            card.appendChild(h1)
-            card.appendChild(p)
+            create_stat(card, stat[0], stat[1])
+          })
+
         })
       } else {
         console.log('error')
       }
+}
+
+function create_stat(card, stat_name, stat_value) {
+  const name = document.createElement('div')
+  name.textContent = stat_name
+  const stats_value = document.createElement('div')
+  stats_value.setAttribute('class', 'stats_value')
+  stats_value.textContent = stat_value
+  card.appendChild(name)
+  card.appendChild(stats_value)
 }
 
 // Send request

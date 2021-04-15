@@ -1,6 +1,4 @@
-// Prepare demo data
-// Data is joined to map using value of 'hc-key' property by default.
-// See API docs for 'joinBy' for more info on linking data and map.
+// This data should be different depending on accepted/rejected/cured
 var data = [
   ['us-ga-295', 0],
   ['us-ga-261', 1],
@@ -164,17 +162,17 @@ var data = [
 ];
 
 // Create the chart
-Highcharts.mapChart('container1', {
+Highcharts.mapChart('rejected', {
   chart: {
       map: 'countries/us/us-ga-all'
   },
 
   title: {
-      text: 'Highmaps basic demo'
+      text: 'Rejected by County'
   },
 
   subtitle: {
-      text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/us/us-ga-all.js">Georgia</a>'
+      text: ''
   },
 
   mapNavigation: {
@@ -190,7 +188,7 @@ Highcharts.mapChart('container1', {
 
   series: [{
       data: data,
-      name: 'Random data',
+      name: 'Rejected',
       states: {
           hover: {
               color: '#BADA55'
