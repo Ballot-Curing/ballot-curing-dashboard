@@ -12,8 +12,6 @@ var request = new XMLHttpRequest()
 request.open('GET', 'https://60663eecb8fbbd0017568315.mockapi.io/api/v1/BallotStats', true)
 
 request.onload = function () {
-    // Begin accessing JSON data here
-
     var data = JSON.parse(this.response)
     if (request.status >= 200 && request.status < 400) {
         data.forEach((stats_data) => {

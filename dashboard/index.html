@@ -32,6 +32,8 @@
   <!-- Custom styles for this template -->
   <link href="dashboard.css" rel="stylesheet">
   <link href="stats.css" rel="stylesheet">
+  <link href="map.css" rel="stylesheet">
+
 
   <!-- JQuery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
@@ -60,8 +62,10 @@
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Cured Ballots Dashboard</h1>
-          <div class="btn-toolbar mb-2 mb-md-0">
+          <h1 class="h2">Dashboard</h1>
+          
+          <!-- TODO: This doesn't work yet -->
+          <!-- <div class="btn-toolbar mb-2 mb-md-0">
             <div class="dropdown">
               <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
                 <span data-feather="calendar"></span>
@@ -72,21 +76,27 @@
                 <a class="dropdown-item" href="#">NC General (11/3/20)</a>
               </div>
             </div>
-
-          </div>
+          </div> -->
         </div>
         
         <div>
           <h1 class="h2">GA Senate Runoff (1/5/21)</h1>
         </div>
-        <div
-          class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <div id="rejected"></div>
-          <div id="accepted"></div>
-          <div id="cured"></div>
+        
+        <!-- Stats -->
+        <div>
+          <div>
+            <h3 class="h3">Today's Snapshot</h3>
+          </div>
+          <div id="stats"></div>
         </div>
 
-        <div id="stats"></div>
+        <!-- Map -->
+        <div class="map_container">
+          <div id="rejected" class="map"></div>
+          <div id="accepted" class="map"></div>
+          <div id="cured" class="map"></div>
+        </div>
 
 
         <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">

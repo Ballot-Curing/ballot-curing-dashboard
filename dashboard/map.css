@@ -1,0 +1,12 @@
+.map_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  background-color: rgba(0, 44, 165, 0.1);
+}
+
+
+.map {
+  height: 300px; 
+  max-width: 400px; 
+}
