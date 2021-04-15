@@ -7,9 +7,17 @@ app.appendChild(container)
 
 // Create a request variable and assign a new XMLHttpRequest object to it.
 var request = new XMLHttpRequest()
-
+ 
 // Open a new connection, using the GET request on the URL endpoint
-request.open('GET', 'https://60663eecb8fbbd0017568315.mockapi.io/api/v1/BallotStats', true)
+// request.open('GET', 'https://60663eecb8fbbd0017568315.mockapi.io/api/v1/BallotStats', true)
+
+request.open('GET', 'http://128.220.221.36:3999/api/v1/stats/?state=ga&election_dt=01-04-2021', true)
+request.setRequestHeader("Access-Control-Allow-Headers", "*")
+request.setRequestHeader("Access-Control-Request-Headers", "x-requested-with, content-type")
+request.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE")
+request.setRequestHeader("Access-Control-Max-Age", "3600")
+
+
 
 request.onload = function () {
     var data = JSON.parse(this.response)
