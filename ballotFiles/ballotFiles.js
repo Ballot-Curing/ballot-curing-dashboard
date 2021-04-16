@@ -96,8 +96,7 @@ $(document).ready(function () {
     selected_state = $(this).text();
     $.getJSON("jsondata/data.json", function (data) {
       election_data = data[selected_state][0].elections.dates.split(",");
-      county_data = data[selected_state][0].counties.split(",");
-      city_data = data[selected_state][0].cities.split(",");
+
       //$("#dropdownMenuElection").empty().append('<li><a class="dropdown-item" data-value="3" value="3" href="#">' + '01-04-2021' + '</a></li>');
 
       var $election_drop = $("#dropdownMenuElection");
@@ -106,19 +105,6 @@ $(document).ready(function () {
         $election_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
       });
 
-      var $county_drop = $("#dropdownMenuCounty");
-      $county_drop.empty();
-      $county_drop.append('<input type="text" placeholder="Search.." id="countyInput" onkeyup="filterCounty()">');
-      $.each(county_data, function (index, value) {
-        $county_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
-      });
-
-      var $city_drop = $("#dropdownMenuCity");
-      $city_drop.empty();
-      $city_drop.append('<input type="text" placeholder="Search.." id="cityInput" onkeyup="filterCity()">');
-      $.each(city_data, function (index, value) {
-        $city_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
-      });
 
       $('#dropdownMenuElection a').on('click', function () {
         console.log($(this).text());
@@ -126,8 +112,22 @@ $(document).ready(function () {
         selected_election = $(this).text();
         status_data = data[selected_state][0].elections[selected_election].status.split(",");
         issue_data = data[selected_state][0].elections[selected_election].issues.split(",");
-        console.log(issue_data);
+        county_data = data[selected_state][0].counties.split(",");
+        city_data = data[selected_state][0].cities.split(",");
 
+        var $county_drop = $("#dropdownMenuCounty");
+        $county_drop.empty();
+        $county_drop.append('<input type="text" placeholder="Search.." id="countyInput" onkeyup="filterCounty()">');
+        $.each(county_data, function (index, value) {
+          $county_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
+        });
+  
+        var $city_drop = $("#dropdownMenuCity");
+        $city_drop.empty();
+        $city_drop.append('<input type="text" placeholder="Search.." id="cityInput" onkeyup="filterCity()">');
+        $.each(city_data, function (index, value) {
+          $city_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
+        });
 
         var $status_drop = $("#dropdownMenuStatus");
         $status_drop.empty();
@@ -233,8 +233,6 @@ $(document).ready(function () {
     $('#dropdownMenuCity').empty();
     $('#dropdownMenuStatus').empty();
     $('#dropdownMenuIssue').empty();
-
-
 
     $("#countyInput").val('');
     $("#downloadBtn").hide();
