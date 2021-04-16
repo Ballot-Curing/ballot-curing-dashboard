@@ -81,7 +81,8 @@
                 County
             </button>
             <!-- TODO: add checkbox-menu to class to handle multiple inputs -->
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu" id = "dropdownMenuCounty" aria-labelledby="dropdownMenuButton">
+                <input type="text" placeholder="Search.." id="countyInput" onkeyup="filterCounty()">
                 <li><a class="dropdown-item" data-value="1" href="#">Fulton</a></li>
                 <li><a class="dropdown-item" data-value="2" href="#">Gwinnett</a></li>
                 <!-- <input class="form-control" id="myInput" type="text" placeholder="Search..">
@@ -99,6 +100,7 @@
                 City
             </button>
             <div class="dropdown-menu" id = "dropdownMenuCity" aria-labelledby="dropdownMenuButton">
+                <input type="text" placeholder="Search.." id="cityInput" onkeyup="filterCity()">
                 <li><a class="dropdown-item" data-value="1" href="#">Atlanta</a></li>
                 <li><a class="dropdown-item" data-value="2" href="#">Savannah</a></li>
             </div>

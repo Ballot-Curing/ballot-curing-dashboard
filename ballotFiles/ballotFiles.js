@@ -6,6 +6,38 @@ function ajaxRequest(params) {
   })
 }
 
+function filterCounty() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("countyInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("dropdownMenuCounty");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
+
+function filterCity() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("cityInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("dropdownMenuCity");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
+
 function dropdownToggle() {
   // select the main dropdown button element
   var dropdown = $(this).parent().parent().prev();
@@ -29,8 +61,15 @@ $(document).ready(function () {
   $("#table tbody").hide();
   $("#downloadBtn").hide();
 
+  $('#dropdownMenuElection').empty().hide();
+  $('#dropdownMenuCounty').empty().hide();
+  $('#dropdownMenuCity').empty().hide();
+  $('#dropdownMenuStatus').empty().hide();
+  $('#dropdownMenuIssue').empty().hide();
+
   $('#mainbody').on('click', '.dropdown-menu a', dropdownToggle);
 
+  //$('#mainbody').on('keyup', '.dropdown-menu input', filterFunction);
 
   //$("#dropdownMenuElection").hide();
   $('#dropdownMenuState a').on('click', function () {
@@ -197,7 +236,15 @@ $(document).ready(function () {
     $('#dropdownCity').html('City');
     $('#dropdownStatus').html('Status');
     $('#dropdownIssue').html('Issue');
-    $("#dropdownMenuElection").empty()
+
+    $('#dropdownMenuElection').empty();
+    $('#dropdownMenuCounty').empty();
+    $('#dropdownMenuCity').empty();
+    $('#dropdownMenuStatus').empty();
+    $('#dropdownMenuIssue').empty();
+
+
+    $("#countyInput").val('');
     $("#downloadBtn").hide();
     $("#table tbody").empty();
     $("#table tbody").hide();
