@@ -61,11 +61,11 @@ $(document).ready(function () {
   $("#table tbody").hide();
   $("#downloadBtn").hide();
 
-  $('#dropdownMenuElection').empty().hide();
-  $('#dropdownMenuCounty').empty().hide();
-  $('#dropdownMenuCity').empty().hide();
-  $('#dropdownMenuStatus').empty().hide();
-  $('#dropdownMenuIssue').empty().hide();
+  $('#dropdownMenuElection').empty();
+  $('#dropdownMenuCounty').empty();
+  $('#dropdownMenuCity').empty();
+  $('#dropdownMenuStatus').empty();
+  $('#dropdownMenuIssue').empty();
 
   $('#mainbody').on('click', '.dropdown-menu a', dropdownToggle);
 
@@ -78,14 +78,16 @@ $(document).ready(function () {
     $.getJSON("jsondata/data.json", function (data) {
       switch (selected_state) {
         case 'GA':
-          election_data = data['GA'][0].elections.split(",");
+          election_data = data['GA'][0].elections.dates.split(",");
+          county_data = data['GA'][0].counties.split(",");
           city_data = data['GA'][0].cities.split(",");
           //county_data = data['GA'][0].county.split(",");
           console.log(city_data);
           //$("#dropdownMenuElection").empty().append('<li><a class="dropdown-item" data-value="3" value="3" href="#">' + '01-04-2021' + '</a></li>');
           break;
         case 'NC':
-          election_data = data['NC'][0].elections.split(",");
+          election_data = data['NC'][0].elections.dates.split(",");
+          county_data = data['NC'][0].counties.split(",");
           city_data = data['NC'][0].cities.split(",");
           console.log(city_data);
 
@@ -101,8 +103,16 @@ $(document).ready(function () {
         $election_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
       });
 
+      var $county_drop = $("#dropdownMenuCounty");
+      $county_drop.empty();
+      $county_drop.append('<input type="text" placeholder="Search.." id="countyInput" onkeyup="filterCounty()">');
+      $.each(county_data, function(index, value) {
+        $county_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
+      });
+
       var $city_drop = $("#dropdownMenuCity");
       $city_drop.empty();
+      $city_drop.append('<input type="text" placeholder="Search.." id="cityInput" onkeyup="filterCity()">');
       $.each(city_data, function(index, value) {
         $city_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
       });
@@ -242,6 +252,7 @@ $(document).ready(function () {
     $('#dropdownMenuCity').empty();
     $('#dropdownMenuStatus').empty();
     $('#dropdownMenuIssue').empty();
+
 
 
     $("#countyInput").val('');
