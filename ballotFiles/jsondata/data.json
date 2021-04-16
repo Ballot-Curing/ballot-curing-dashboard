@@ -5,10 +5,12 @@
                 "dates": "01-04-2021, 11-03-2020",
                 "01-04-2021": {
                     "date": "01-04-2021",
+                    "status": "A,R",
                     "issues": "Missing Signature, Invalid Signature, MIDR - ID Not Provided"
                 },
                 "11-03-2020": {
                     "date": "11-03-2020",
+                    "status": "A,R",
                     "issues": "Missing Signature, Invalid Signature, MIDR - ID Not Provided"
                 }
             },
@@ -22,6 +24,7 @@
                 "dates": "11-03-2020",
                 "11-03-2020": {
                     "date": "11-03-2020",
+                    "status": "A,R",
                     "issues": "Missing Signature, Invalid Signature, MIDR - ID Not Provided"
                 }
             },

@@ -38,6 +38,22 @@ function filterCity() {
   }
 }
 
+function filterIssue() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("issueInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("dropdownMenuIssue");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
+
 function dropdownToggle() {
   // select the main dropdown button element
   var dropdown = $(this).parent().parent().prev();
@@ -72,70 +88,65 @@ $(document).ready(function () {
   //$('#mainbody').on('keyup', '.dropdown-menu input', filterFunction);
 
   //$("#dropdownMenuElection").hide();
+  var selected_state = "";
+  var selected_election = "";
+
   $('#dropdownMenuState a').on('click', function () {
     console.log($(this).text());
     selected_state = $(this).text();
     $.getJSON("jsondata/data.json", function (data) {
-      switch (selected_state) {
-        case 'GA':
-          election_data = data['GA'][0].elections.dates.split(",");
-          county_data = data['GA'][0].counties.split(",");
-          city_data = data['GA'][0].cities.split(",");
-          //county_data = data['GA'][0].county.split(",");
-          console.log(city_data);
-          //$("#dropdownMenuElection").empty().append('<li><a class="dropdown-item" data-value="3" value="3" href="#">' + '01-04-2021' + '</a></li>');
-          break;
-        case 'NC':
-          election_data = data['NC'][0].elections.dates.split(",");
-          county_data = data['NC'][0].counties.split(",");
-          city_data = data['NC'][0].cities.split(",");
-          console.log(city_data);
+      election_data = data[selected_state][0].elections.dates.split(",");
+      county_data = data[selected_state][0].counties.split(",");
+      city_data = data[selected_state][0].cities.split(",");
+      //$("#dropdownMenuElection").empty().append('<li><a class="dropdown-item" data-value="3" value="3" href="#">' + '01-04-2021' + '</a></li>');
 
-
-          //county_data = data['GA'][0].county.split(",");
-
-          //$("#dropdownMenuElection").empty().append('<li><a class="dropdown-item" data-value="3" value="3" href="#">' + '11-03-2021' + '</a></li>');
-          break;
-      }
-     var $election_drop = $("#dropdownMenuElection");
+      var $election_drop = $("#dropdownMenuElection");
       $election_drop.empty();
-      $.each(election_data, function(index, value) {
+      $.each(election_data, function (index, value) {
         $election_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
       });
 
       var $county_drop = $("#dropdownMenuCounty");
       $county_drop.empty();
       $county_drop.append('<input type="text" placeholder="Search.." id="countyInput" onkeyup="filterCounty()">');
-      $.each(county_data, function(index, value) {
+      $.each(county_data, function (index, value) {
         $county_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
       });
 
       var $city_drop = $("#dropdownMenuCity");
       $city_drop.empty();
       $city_drop.append('<input type="text" placeholder="Search.." id="cityInput" onkeyup="filterCity()">');
-      $.each(city_data, function(index, value) {
+      $.each(city_data, function (index, value) {
         $city_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
       });
 
+      $('#dropdownMenuElection a').on('click', function () {
+        console.log($(this).text());
+        console.log(data[selected_state][0].elections);
+        selected_election = $(this).text();
+        status_data = data[selected_state][0].elections[selected_election].status.split(",");
+        issue_data = data[selected_state][0].elections[selected_election].issues.split(",");
+        console.log(issue_data);
 
 
+        var $status_drop = $("#dropdownMenuStatus");
+        $status_drop.empty();
+        $.each(status_data, function (index, value) {
+          $status_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
+        });
 
+        var $issue_drop = $("#dropdownMenuIssue");
+        $issue_drop.empty();
+        $issue_drop.append('<input type="text" placeholder="Search.." id="issueInput" onkeyup="filterIssue()">');
+        $.each(issue_data, function (index, value) {
+          $issue_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
+        });
+      });
 
-
-      //$("#dropdownMenuElection").empty().append('<li><a class="dropdown-item" data-value="3" value="3" href="#">' + 'DATE' + '</a></li>');
-      //<li><a class="dropdown-item" data-value="1" href="#">01-04-2021</a></li>
-
-      //$("#dropdownMenuElection").show();
     });
   });
+  console.log(selected_state);
 
-
-//   $('#dropdownMenuState a').on('click', function() {
-//     console.log("changed");
-//     console.log($(this).text());
-//     $("#dropdownMenuElection").load("textdata/" + $(this).text() + ".txt");
-//     console.log($("#dropdownMenuElection").text());
-//  });
 
   var state_val = "";
   var election_val = "";
@@ -206,36 +217,6 @@ $(document).ready(function () {
     $("#downloadBtn").show();
 
   });
-
-  //console.log("CHANGED");
-
-  // $("#dropdownState dropdownMenuState").change(function() {
-  //   console.log("change");
-  //   var $dropdown = $(this);
-  
-  //   $.getJSON("jsondata/data.json", function(data) {
-  //     var key = $dropdown.val();
-  //     var vals = [];
-                
-  //     switch(key) {
-  //       case 'GA':
-  //         vals = data.GA.split(",");
-  //         break;
-  //       case 'NC':
-  //         vals = data.NC.split(",");
-  //         break;
-  //       // case 'base':
-  //       //   vals = ['Please choose from above'];
-  //     }
-      
-  //     var $secondChoice = $("#dropdownElection");
-  //     $secondChoice.empty();
-  //     $.each(vals, function(index, value) {
-  //       $secondChoice.append("<li>" + value + "</li>");
-  //     });
-  
-  //   });
-  // });
 
 
   // Reset Filters Button

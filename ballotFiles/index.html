@@ -81,7 +81,7 @@
                 County
             </button>
             <!-- TODO: add checkbox-menu to class to handle multiple inputs -->
-            <div class="dropdown-menu" id = "dropdownMenuCounty" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu" id="dropdownMenuCounty" aria-labelledby="dropdownMenuButton">
                 <input type="text" placeholder="Search.." id="countyInput" onkeyup="filterCounty()">
                 <li><a class="dropdown-item" data-value="1" href="#">Fulton</a></li>
                 <li><a class="dropdown-item" data-value="2" href="#">Gwinnett</a></li>
@@ -99,7 +99,7 @@
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 City
             </button>
-            <div class="dropdown-menu" id = "dropdownMenuCity" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu" id="dropdownMenuCity" aria-labelledby="dropdownMenuButton">
                 <input type="text" placeholder="Search.." id="cityInput" onkeyup="filterCity()">
                 <li><a class="dropdown-item" data-value="1" href="#">Atlanta</a></li>
                 <li><a class="dropdown-item" data-value="2" href="#">Savannah</a></li>
@@ -110,7 +110,7 @@
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Ballot Status
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu" id="dropdownMenuStatus" aria-labelledby="dropdownMenuButton">
                 <li><a class="dropdown-item" data-value="1" href="#">A</a></li>
                 <li><a class="dropdown-item" data-value="2" href="#">R</a></li>
             </div>
@@ -120,7 +120,8 @@
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Ballot Issue
             </button>
-            <div class="dropdown-menu checkbox-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu" id="dropdownMenuIssue" aria-labelledby="dropdownMenuButton">
+                <input type="text" placeholder="Search.." id="issueInput" onkeyup="filterIssue()">
                 <li><a class="dropdown-item" data-value="1" href="#">Missing Signature</a></li>
                 <li><a class="dropdown-item" data-value="2" href="#">Invalid Signature</a></li>
                 <li><a class="dropdown-item" data-value="3" href="#">ID</a></li>
