@@ -209,7 +209,7 @@ $(document).ready(function () {
       dataType: 'json',
       data: { state: state_val, election_dt: election_val, county: county_val, city: city_val, ballot_rtn_status: status_val, ballot_issue: issue_val },
       success: function (response) {
-        console.log(response);
+        console.log(response.length);
         $.each(response, function (i, item) {
           $("#table tbody").append(
             "<tr>"
@@ -222,11 +222,19 @@ $(document).ready(function () {
             + "<td>" + item.ballot_issue + "</td>"
             + "</tr>")
         })
+
+        if (response.length == 0) {
+          console.log("zero");
+          $("#table tbody").append('<tr><td colspan="7" style="text-align: center;">No matching records found</td></tr>');
+        }
       },
-      error: function (e) {
+      error: function (xhr, textStatus, errorThrown) {
+        console.log(xhr.status);
+        $("#table tbody").append("Cannot establish connection to database...");
         $("#divResult").html("WebSerivce unreachable");
       }
     });
+
     $("#downloadBtn").show();
 
   });
