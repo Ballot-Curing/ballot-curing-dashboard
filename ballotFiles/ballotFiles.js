@@ -92,6 +92,7 @@ $(document).ready(function () {
   var selected_election = "";
 
   $('#dropdownMenuState a').on('click', function () {
+    $("#dropdownState").css('border-color', '');
     console.log($(this).text());
     selected_state = $(this).text();
     $.getJSON("jsondata/data.json", function (data) {
@@ -107,6 +108,7 @@ $(document).ready(function () {
 
 
       $('#dropdownMenuElection a').on('click', function () {
+        $("#dropdownElection").css('border-color', '');
         console.log($(this).text());
         console.log(data[selected_state][0].elections);
         selected_election = $(this).text();
@@ -159,11 +161,22 @@ $(document).ready(function () {
   $("#enterBtn").on("click", function () {
     $("#table tbody").empty();
     state_val = $("#dropdownState").text();
+    console.log(state_val);
     console.log("HI");
     console.log($("#dropdownElection").val());
     console.log($("#dropdownState").attr('value'));
     election_val = $("#dropdownElection").text();
     console.log($("#dropdownElection").attr('value'));
+    if (($("#dropdownState").text()).indexOf("State") >= 0) {
+      console.log("BAD");
+      $("#dropdownState").css('border-color', 'red');
+      $("#dropdownState").css('border-width', 'medium');
+    }
+    if (($("#dropdownElection").text()).indexOf("Election") >= 0) {
+      console.log("BAD");
+      $("#dropdownElection").css('border-color', 'red');
+      $("#dropdownElection").css('border-width', 'medium');
+    }
     if (($("#dropdownCounty").text()).indexOf("County") < 0) {
       console.log("here");
       county_val = $("#dropdownCounty").text();
@@ -233,6 +246,9 @@ $(document).ready(function () {
     $('#dropdownMenuCity').empty();
     $('#dropdownMenuStatus').empty();
     $('#dropdownMenuIssue').empty();
+
+    $("#dropdownState").css('border-color', '');
+    $("#dropdownElection").css('border-color', '');
 
     $("#countyInput").val('');
     $("#downloadBtn").hide();
