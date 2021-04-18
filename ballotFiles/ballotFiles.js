@@ -150,16 +150,18 @@ $(document).ready(function () {
   console.log(selected_state);
 
 
-  var state_val = "";
-  var election_val = "";
-  var county_val = "";
-  var city_val = "";
-  var status_val = "";
-  var issue_val = "";
 
   // Enter Button
   $("#enterBtn").on("click", function () {
     $("#table tbody").empty();
+    var state_val = "";
+    var election_val = "";
+    var county_val = "";
+    var city_val = "";
+    var status_val = "";
+    var issue_val = "";
+
+
     state_val = $("#dropdownState").text();
     console.log(state_val);
     console.log("HI");
@@ -198,8 +200,8 @@ $(document).ready(function () {
     console.log(election_val);
     console.log(county_val);
     console.log(city_val);
-    //console.log(status_val);
-    //console.log(issue_val);
+    console.log(status_val);
+    console.log(issue_val);
 
     // , county: county_val, city: city_val, ballot_rtn_status: status_val, ballot_issue: issue_val
     $("#table tbody").show();
@@ -249,6 +251,8 @@ $(document).ready(function () {
     $('#dropdownStatus').html('Status');
     $('#dropdownIssue').html('Issue');
 
+    console.log($('#dropdownIssue').text());
+
     $('#dropdownMenuElection').empty();
     $('#dropdownMenuCounty').empty();
     $('#dropdownMenuCity').empty();
@@ -259,6 +263,9 @@ $(document).ready(function () {
     $("#dropdownElection").css('border-color', '');
 
     $("#countyInput").val('');
+    $("#cityInput").val('');
+    $("#issueInput").val('');
+
     $("#downloadBtn").hide();
     $("#table tbody").empty();
     $("#table tbody").hide();
