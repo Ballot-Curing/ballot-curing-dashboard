@@ -95,9 +95,10 @@ $(document).ready(function () {
     $("#dropdownState").css('border-color', '');
     console.log($(this).text());
     selected_state = $(this).text();
+    console.log(selected_state);
     $.getJSON("jsondata/data.json", function (data) {
       election_data = data[selected_state][0].elections.dates.split(",");
-
+      console.log(election_data);
       //$("#dropdownMenuElection").empty().append('<li><a class="dropdown-item" data-value="3" value="3" href="#">' + '01-04-2021' + '</a></li>');
 
       var $election_drop = $("#dropdownMenuElection");
@@ -151,16 +152,17 @@ $(document).ready(function () {
 
 
 
+
   // Enter Button
   $("#enterBtn").on("click", function () {
     $("#table tbody").empty();
+
     var state_val = "";
     var election_val = "";
     var county_val = "";
     var city_val = "";
     var status_val = "";
     var issue_val = "";
-
 
     state_val = $("#dropdownState").text();
     console.log(state_val);
