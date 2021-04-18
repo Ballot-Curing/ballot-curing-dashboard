@@ -1,11 +1,4 @@
-function ajaxRequest(params) {
-  console.log($("#dropdownState").text())
-  var url = 'http://128.220.221.36:5500/api/v1/ballots/?state=GA&election_dt=01-04-2021'
-  $.get(url).then(function (res) {
-    params.success(res)
-  })
-}
-
+// Search bar for County Dropdown
 function filterCounty() {
   var input, filter, ul, li, a, i;
   input = document.getElementById("countyInput");
@@ -22,6 +15,7 @@ function filterCounty() {
   }
 }
 
+// Search bar for City Dropdown
 function filterCity() {
   var input, filter, ul, li, a, i;
   input = document.getElementById("cityInput");
@@ -38,6 +32,7 @@ function filterCity() {
   }
 }
 
+// Search bar for Issue Dropdown
 function filterIssue() {
   var input, filter, ul, li, a, i;
   input = document.getElementById("issueInput");
@@ -54,6 +49,7 @@ function filterIssue() {
   }
 }
 
+// Replace dropdown text with selected value
 function dropdownToggle() {
   // select the main dropdown button element
   var dropdown = $(this).parent().parent().prev();
@@ -64,9 +60,6 @@ function dropdownToggle() {
 
   // change the VALUE of the button based on the data-value property of selected option
   dropdown.val($(this).prop('data-value'));
-  console.log(dropdown);
-
-  //console.log($("#dropdownState").text());
 
 }
 
@@ -83,41 +76,38 @@ $(document).ready(function () {
   $('#dropdownMenuStatus').empty();
   $('#dropdownMenuIssue').empty();
 
+  // When a dropdown item is clicked
   $('#mainbody').on('click', '.dropdown-menu a', dropdownToggle);
 
-  //$('#mainbody').on('keyup', '.dropdown-menu input', filterFunction);
-
-  //$("#dropdownMenuElection").hide();
   var selected_state = "";
   var selected_election = "";
 
+  // State dropdown item is clicked
   $('#dropdownMenuState a').on('click', function () {
     $("#dropdownState").css('border-color', '');
-    console.log($(this).text());
     selected_state = $(this).text();
-    console.log(selected_state);
     $.getJSON("jsondata/data.json", function (data) {
-      election_data = data[selected_state][0].elections.dates.split(",");
-      console.log(election_data);
-      //$("#dropdownMenuElection").empty().append('<li><a class="dropdown-item" data-value="3" value="3" href="#">' + '01-04-2021' + '</a></li>');
 
+      // Populate Election dropdown with respective elections
+      election_data = data[selected_state][0].elections.dates.split(",");
       var $election_drop = $("#dropdownMenuElection");
       $election_drop.empty();
       $.each(election_data, function (index, value) {
         $election_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
       });
 
-
+      // Election dropdown item is clicked 
       $('#dropdownMenuElection a').on('click', function () {
         $("#dropdownElection").css('border-color', '');
-        console.log($(this).text());
-        console.log(data[selected_state][0].elections);
+
+        //Get respective data from data/json
         selected_election = $(this).text();
         status_data = data[selected_state][0].elections[selected_election].status.split(",");
         issue_data = data[selected_state][0].elections[selected_election].issues.split(",");
         county_data = data[selected_state][0].counties.split(",");
         city_data = data[selected_state][0].cities.split(",");
 
+        // Populate County dropdown with respective counties
         var $county_drop = $("#dropdownMenuCounty");
         $county_drop.empty();
         $county_drop.append('<input type="text" placeholder="Search.." id="countyInput" onkeyup="filterCounty()">');
@@ -125,6 +115,7 @@ $(document).ready(function () {
           $county_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
         });
   
+        // Populate City dropdown with respective cities
         var $city_drop = $("#dropdownMenuCity");
         $city_drop.empty();
         $city_drop.append('<input type="text" placeholder="Search.." id="cityInput" onkeyup="filterCity()">');
@@ -132,12 +123,14 @@ $(document).ready(function () {
           $city_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
         });
 
+        // Populate Status dropdown (A,R for all)
         var $status_drop = $("#dropdownMenuStatus");
         $status_drop.empty();
         $.each(status_data, function (index, value) {
           $status_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
         });
 
+        // Populate Issue dropdown with respective issues
         var $issue_drop = $("#dropdownMenuIssue");
         $issue_drop.empty();
         $issue_drop.append('<input type="text" placeholder="Search.." id="issueInput" onkeyup="filterIssue()">');
@@ -148,29 +141,30 @@ $(document).ready(function () {
 
     });
   });
-  console.log(selected_state);
 
+  var state_val = "";
+  var election_val = "";
+  var county_val = "";
+  var city_val = "";
+  var status_val = "";
+  var issue_val = "";
 
-
-
-  // Enter Button
+  // Enter Button clciked
   $("#enterBtn").on("click", function () {
     $("#table tbody").empty();
 
-    var state_val = "";
-    var election_val = "";
-    var county_val = "";
-    var city_val = "";
-    var status_val = "";
-    var issue_val = "";
+    state_val = "";
+    election_val = "";
+    county_val = "";
+    city_val = "";
+    status_val = "";
+    issue_val = "";
 
+    // State and Election values
     state_val = $("#dropdownState").text();
-    console.log(state_val);
-    console.log("HI");
-    console.log($("#dropdownElection").val());
-    console.log($("#dropdownState").attr('value'));
     election_val = $("#dropdownElection").text();
-    console.log($("#dropdownElection").attr('value'));
+
+    // Highlight State and/or Election buttons with red if items not selected
     if (($("#dropdownState").text()).indexOf("State") >= 0) {
       console.log("BAD");
       $("#dropdownState").css('border-color', 'red');
@@ -181,6 +175,8 @@ $(document).ready(function () {
       $("#dropdownElection").css('border-color', 'red');
       $("#dropdownElection").css('border-width', 'medium');
     }
+
+    // Set additional paramter dropdowns
     if (($("#dropdownCounty").text()).indexOf("County") < 0) {
       console.log("here");
       county_val = $("#dropdownCounty").text();
@@ -198,15 +194,9 @@ $(document).ready(function () {
       issue_val = $("#dropdownIssue").text();
     }
 
-    console.log(state_val);
-    console.log(election_val);
-    console.log(county_val);
-    console.log(city_val);
-    console.log(status_val);
-    console.log(issue_val);
-
-    // , county: county_val, city: city_val, ballot_rtn_status: status_val, ballot_issue: issue_val
     $("#table tbody").show();
+
+    // Ajax request for ballot API based on selected parameters
     $.ajax({
       type: 'GET',
       url: 'http://128.220.221.36:5500/api/v1/ballots/',
@@ -252,8 +242,6 @@ $(document).ready(function () {
     $('#dropdownCity').html('City');
     $('#dropdownStatus').html('Status');
     $('#dropdownIssue').html('Issue');
-
-    console.log($('#dropdownIssue').text());
 
     $('#dropdownMenuElection').empty();
     $('#dropdownMenuCounty').empty();
