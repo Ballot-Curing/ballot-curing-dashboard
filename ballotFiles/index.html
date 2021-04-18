@@ -13,12 +13,14 @@
 
 </head>
 
-<body>
+<body id="mainbody">
     <h2 class="profile-name">Download Absentee Ballot File</h2>
     <p>
-        <em>Follow the 3 steps below to view (and download) absentee ballot statuses of voters in the selected election</em>
+        <em>Follow the 3 steps below to view (and download) absentee ballot statuses of voters in the selected
+            election</em>
         <br>
-        <em class="small">*Note: Downloaded files include additional attributes that are absent from the displayed table</em>
+        <em class="small">*Note: Downloaded files include additional attributes that are absent from the displayed
+            table</em>
     </p>
 
     <div class="d-flex flex-row">
@@ -27,8 +29,8 @@
         </div>
         <br>
         <div class="dropdown" style="order: 2">
-            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownState" data-bs-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownState"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Select State
             </button>
             <div class="dropdown-menu" id="dropdownMenuState" aria-labelledby="dropdownMenuButton">
@@ -45,14 +47,14 @@
         </div>
         <br>
         <div class="dropdown" style="order: 2">
-            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownElection" data-bs-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownElection"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Select Election
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" data-value="1" href="#">01-04-2021</a></li>
-                <li><a class="dropdown-item" data-value="2" href="#">11-03-2020</a></li>
- 
+            <div class="dropdown-menu" id="dropdownMenuElection" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" data-value="1" value=1 href="#">01-04-2021</a></li>
+                <li><a class="dropdown-item" data-value="2" value=2 href="#">11-03-2020</a></li>
+
             </div>
         </div>
     </div>
@@ -64,7 +66,7 @@
         <br>
         <div class="btn-group-toggle mr-auto" style="order: 2">
             <label class="btn btn-secondary active">
-                <input type="checkbox" unchecked autocomplete="off"> Select Additional Parameters
+                 Select Additional Parameters Below
             </label>
         </div>
         <div style="order: 3">
@@ -74,12 +76,13 @@
 
     <div class="btn-group mr-10">
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownCounty" data-bs-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownCounty"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 County
             </button>
             <!-- TODO: add checkbox-menu to class to handle multiple inputs -->
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu scrollable-menu" style="overflow-y:auto; max-height:50vh" id="dropdownMenuCounty" aria-labelledby="dropdownMenuButton">
+                <input type="text" placeholder="Search.." id="countyInput" onkeyup="filterCounty()">
                 <li><a class="dropdown-item" data-value="1" href="#">Fulton</a></li>
                 <li><a class="dropdown-item" data-value="2" href="#">Gwinnett</a></li>
                 <!-- <input class="form-control" id="myInput" type="text" placeholder="Search..">
@@ -92,31 +95,33 @@
             </div>
         </div>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownCity" data-bs-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownCity"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 City
             </button>
-            <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu" id="dropdownMenuCity" style="overflow-y:auto; max-height:50vh" aria-labelledby="dropdownMenuButton">
+                <input type="text" placeholder="Search.." id="cityInput" onkeyup="filterCity()">
                 <li><a class="dropdown-item" data-value="1" href="#">Atlanta</a></li>
                 <li><a class="dropdown-item" data-value="2" href="#">Savannah</a></li>
             </div>
         </div>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownStatus" data-bs-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownStatus"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Ballot Status
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu" id="dropdownMenuStatus" style="overflow-y:auto; max-height:50vh" aria-labelledby="dropdownMenuButton">
                 <li><a class="dropdown-item" data-value="1" href="#">A</a></li>
                 <li><a class="dropdown-item" data-value="2" href="#">R</a></li>
             </div>
         </div>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownIssue" data-bs-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownIssue"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Ballot Issue
             </button>
-            <div class="dropdown-menu checkbox-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu" id="dropdownMenuIssue" style="overflow-y:auto; max-height:50vh" aria-labelledby="dropdownMenuButton">
+                <input type="text" placeholder="Search.." id="issueInput" onkeyup="filterIssue()">
                 <li><a class="dropdown-item" data-value="1" href="#">Missing Signature</a></li>
                 <li><a class="dropdown-item" data-value="2" href="#">Invalid Signature</a></li>
                 <li><a class="dropdown-item" data-value="3" href="#">ID</a></li>
@@ -133,10 +138,8 @@
 
 
 
-
-    <table id="table" data-toggle="table" data-height="460"  
-        data-side-pagination="server" data-pagination="true"   data-filter-control="true"
-        data-show-search-clear-button="true">
+    <table id="table" data-toggle="table" data-height="460" data-side-pagination="server" data-pagination="true"
+        data-filter-control="true" data-show-search-clear-button="true">
         <thead>
             <tr class="content">
                 <th data-field="county" data-sortable="true">county</th>
