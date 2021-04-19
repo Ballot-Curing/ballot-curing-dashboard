@@ -59,52 +59,76 @@
   <div class="container-fluid">
     <div class="row">
       <div id="nav-placeholder"></div>
-
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">Dashboard</h1>
-          
-          <!-- TODO: This doesn't work yet -->
-          <!-- <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="dropdown">
-              <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
-                <span data-feather="calendar"></span>
-                Select Election
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">GA Senate Runoff (1/5/21)</a>
-                <a class="dropdown-item" href="#">NC General (11/3/20)</a>
-              </div>
-            </div>
-          </div> -->
         </div>
-        
+    
         <div>
           <h1 class="h2">GA Senate Runoff (1/5/21)</h1>
         </div>
-        
-        <!-- Stats -->
         <div>
-          <div>
-            <h3 class="h3">Today's Snapshot</h3>
+          <h3 class="h3">Today's Snapshot</h3>
+        </div>
+        <!-- Quick Stats -->
+        <div id="quick_stats"></div>
+
+        <div>
+          <h3 class="h3">Maps</h3>
+        </div>
+        <!-- Map and stats -->
+
+        <div class="map_stats_container"> 
+          <div class="map_side">
+            <ul class="nav nav-pills" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="accepted-tab" data-bs-toggle="tab" data-bs-target="#accepted" type="button" role="tab" aria-controls="Accepted" aria-selected="true">Accepted</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="rejected-tab" data-bs-toggle="tab" data-bs-target="#rejected" type="button" role="tab" aria-controls="Rejected" aria-selected="false">Rejected</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="cured-tab" data-bs-toggle="tab" data-bs-target="#cured" type="button" role="tab" aria-controls="Cured" aria-selected="false">Cured</button>
+              </li>
+            </ul>
+  
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="accepted" role="tabpanel" aria-labelledby="accepted-tab">
+                <div class="map_container">
+                  <div id="accepted" class="map"></div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="cured" role="tabpanel" aria-labelledby="cured-tab">
+                <div class="map_container">
+                  <div id="cured" class="map"></div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">
+                <div class="map_container">
+                  <div id="rejected" class="map"></div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div id="stats"></div>
+          
+
+          <!-- Stats -->
+          <div class="stats_side">
+            <div id="stats"></div>
+          </div>
         </div>
 
-        <!-- Charts
-        <div>
-          <h3 class="h3">Charts</h3>
-        </div> -->
+        <!-- Charts -->
 
         <div>
           <div>
             <h3 class="h3">Donut Chart</h3>
           </div>
-          <div class="donutChartsContainer">
-            <div id="donutChartContainer" class="chart_container"></div>
+          <div class="donutChartsContainer" id="donut">
+            <!-- <div id="donutChartContainer" class="chart_container"></div>
             <div id="donutChart2Container" class="chart_container"></div>
-            <div id="donutChart3Container" class="chart_container"></div>
+            <div id="donutChart3Container" class="chart_container"></div> -->
 
           </div>
 
@@ -117,17 +141,6 @@
           </div> 
           
         </div>
-        
-        <!-- Map -->
-        <div>
-          <h3 class="h3">Maps</h3>
-        </div>
-        <div class="map_container">
-          <div id="rejected" class="map"></div>
-          <div id="accepted" class="map"></div>
-          <div id="cured" class="map"></div>
-        </div>
-
       </main>
     </div>
   </div>

@@ -1,65 +1,4 @@
 window.onload = function () {
-  var donutChart = new CanvasJS.Chart("donutChartContainer",
-  {
-    title:{
-      text: "Today's Processed Data"
-    },
-    data: [
-    {
-     type: "doughnut",
-     dataPoints: [
-     {  y: 80, indexLabel: "Accepted" },
-     {  y: 10, indexLabel: "Rejected" },
-     {  y: 5, indexLabel: "Spoiled" },
-     {  y: 5, indexLabel: "Other" },
-     ]
-   }
-   ]
- });
-
-  donutChart.render();
-
-  var donutChart2 = new CanvasJS.Chart("donutChart2Container",
-  {
-    title:{
-      text: "Rejected by Race"
-    },
-    data: [
-    {
-     type: "doughnut",
-     dataPoints: [
-     {  y: 123, indexLabel: "White" },
-     {  y: 123, indexLabel: "Black" },
-     {  y: 123, indexLabel: "Asian" },
-     {  y: 123, indexLabel: "Hispanic" },
-     {  y: 12, indexLabel: "Other" },
-     ]
-   }
-   ]
- });
-
-  donutChart2.render();
-
-  var donutChart3 = new CanvasJS.Chart("donutChart3Container",
-  {
-    title:{
-      text: "Ballot Issues"
-    },
-    data: [
-    {
-     type: "doughnut",
-     dataPoints: [
-     {  y: 123, indexLabel: "Ballot Received after Deadline" },
-     {  y: 42, indexLabel: "Invalid Signature" },
-     {  y: 12, indexLabel: "Missing Signature" },
-     {  y: 10, indexLabel: "Ineligible Elector" },
-     ]
-   }
-   ]
- });
-
-  donutChart3.render();
-
   var chart = new CanvasJS.Chart("lineChartContainer",
   {
 
@@ -119,4 +58,36 @@ window.onload = function () {
   });
 
   chart.render();
+}
+
+function make_chart(data, key, value, title) {
+  const app = document.getElementById('donut')
+  const container = document.createElement('div')
+  container.setAttribute('class', 'chart_container')
+  app.appendChild(container)
+  
+  if (data == null || data.length == 0) { 
+    console.log("Null data for: " + key)
+    return;
+  }
+  
+  let test = []
+  for (i in data) {
+    test.push({y: data[i][value], indexLabel: data[i][key]})
+  }
+
+  var donutChart = new CanvasJS.Chart(container,
+  {
+    title:{
+      text: title
+    },
+    data: [
+    {
+     type: "doughnut",
+     dataPoints: test
+   }
+   ]
+ });
+
+  donutChart.render();
 }
