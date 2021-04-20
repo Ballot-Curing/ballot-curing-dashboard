@@ -15,8 +15,8 @@ quick_stats_app.appendChild(quick_stats_container)
 var request = new XMLHttpRequest()
 
 // Open a new connection, using the GET request on the URL endpoint
-// request.open('GET', 'http://128.220.221.36:5500/api/v1/stats/?state=ga&election_dt=01-04-2021', true)
-request.open('GET', 'http://128.220.221.36:5500/api/v1/stats/?state=nc&election_dt=11-03-2020', true)
+request.open('GET', 'http://128.220.221.36:5500/api/v1/stats/?state=ga&election_dt=01-04-2021', true)
+// request.open('GET', 'http://128.220.221.36:5500/api/v1/stats/?state=nc&election_dt=11-03-2020', true)
 
 
 request.onload = function () {
@@ -33,19 +33,35 @@ request.onload = function () {
         ['Dummy', stats_data.total_cured],
         ['Dummy', stats_data.total_cured],
         ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
 
       ]
 
       quick_stats.forEach((stat) => {
         const card = document.createElement('div')
-        card.setAttribute('class', 'stats_card')
+        card.setAttribute('class', 'card')
         quick_stats_container.appendChild(card)
         create_stat(card, stat[0], stat[1])
       })
 
       stats.forEach((stat) => {
         const card = document.createElement('div')
-        card.setAttribute('class', 'stats_card')
+        card.setAttribute('class', 'card')
         container.appendChild(card)
         create_stat(card, stat[0], stat[1])
       })

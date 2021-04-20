@@ -1,185 +1,168 @@
 var data = [
 
 ];
-var request = new XMLHttpRequest()
- 
-request.open('GET', 'http://128.220.221.36:5500/api/v1/stats/county_stats/?state=ga&election_dt=01-04-2021', true)
 
-// TODO: Modify this to also work for NC
-request.onload = function () {
-    var stats_data = JSON.parse(this.response)
-    if (request.status >= 200 && request.status < 400) {
-      
-      county_data = stats_data.county_data
-      // cured_data = stats_data.county_cured
-
-      // Create the rejected chart
-      Highcharts.mapChart('rejected', {
-        chart: {
-            map: 'countries/us/us-ga-all'
-        },
-
-        title: {
-            text: 'Rejected by County'
-        },
-
-        subtitle: {
-            text: ''
-        },
-
-        mapNavigation: {
-            enabled: true,
-            buttonOptions: {
-                verticalAlign: 'bottom'
+// Get the default map
+$(document).ready(function () {
+  $.ajax({
+      type: "GET",
+      url: "http://128.220.221.36:5500/api/v1/stats/county_stats/?state=ga&election_dt=01-04-2021",
+      dataType: "json",
+      success: function (result, status, xhr) {
+          var stats_data = result
+          rej_percent = []
+          for (index in stats_data.total_rejected) {
+            if (stats_data.total_processed[index]["value"] == 0) {
+              continue;
             }
-        },
-
-        colorAxis: {
-            min: 0
-        },
-
-        series: [{
-          data: data,
-          name: 'Rejected',
-          joinBy: ['name', 'name'],
-          states: {
-              hover: {
-                  color: '#BADA55'
-              }
-          },
-          dataLabels: {
-              enabled: true,
-              format: '{point.name}'
+            percent = {
+              "name": stats_data.total_rejected[index]["name"],
+              "value": 100 * stats_data.total_rejected[index]["value"] / stats_data.total_processed[index]["value"]
+            }
+            rej_percent.push(percent)
           }
-      }]
-      });
 
-      // Create the cured chart
-      Highcharts.mapChart('cured', {
-        chart: {
-            map: 'countries/us/us-ga-all'
-        },
-
-        title: {
-            text: 'Cured by County'
-        },
-
-        subtitle: {
-            text: ''
-        },
-
-        mapNavigation: {
-            enabled: true,
-            buttonOptions: {
-                verticalAlign: 'bottom'
+          cured_percent = []
+          for (index in stats_data.total_cured) {
+            if (stats_data.total_rejected[index]["value"] == 0) {
+              continue;
             }
-        },
 
-        colorAxis: {
-            min: 0
-        },
-
-        series: [{
-          data: data,
-          name: 'Cured',
-          joinBy: ['name', 'name'],
-          states: {
-              hover: {
-                  color: '#BADA55'
-              }
-          },
-          dataLabels: {
-              enabled: true,
-              format: '{point.name}'
-          },
-      }]
-      });
-
-    } else {
-      console.log('error: ' + request.status + " " + request.responseText)
-
-      Highcharts.mapChart('rejected', {
-        chart: {
-            map: 'countries/us/us-ga-all'
-        },
-
-        title: {
-            text: 'Rejected by County'
-        },
-
-        subtitle: {
-            text: ''
-        },
-
-        mapNavigation: {
-            enabled: true,
-            buttonOptions: {
-                verticalAlign: 'bottom'
+            percent = {
+              "name": stats_data.total_cured[index]["name"],
+              "value": 100 * stats_data.total_cured[index]["value"] / stats_data.total_rejected[index]["value"]
             }
-        },
-
-        colorAxis: {
-            min: 0
-        },
-
-        series: [{
-          data: data,
-          name: 'Rejected',
-          joinBy: ['name', 'name'],
-          states: {
-              hover: {
-                  color: '#BADA55'
-              }
-          },
-          dataLabels: {
-              enabled: true,
-              format: '{point.name}'
+            cured_percent.push(percent)
           }
-      }]
-      });
 
-      // Create the cured chart
-      Highcharts.mapChart('cured', {
-        chart: {
-            map: 'countries/us/us-ga-all'
-        },
+          // for each key of rej_data, divide by the value of each proc_data
 
-        title: {
-            text: 'Cured by County'
-        },
 
-        subtitle: {
-            text: ''
-        },
+          // Create the rejected chart
+          Highcharts.mapChart('rejected', {
+            chart: {
+                map: 'countries/us/us-ga-all'
+            },
 
-        mapNavigation: {
-            enabled: true,
-            buttonOptions: {
-                verticalAlign: 'bottom'
-            }
-        },
+            title: {
+                text: 'Percentage Rejected by County'
+            },
 
-        colorAxis: {
-            min: 0
-        },
+            subtitle: {
+                text: ''
+            },
 
-        series: [{
-          data: data,
-          name: 'Cured',
-          joinBy: ['name', 'name'],
-          states: {
-              hover: {
-                  color: '#BADA55'
+            mapNavigation: {
+                enabled: true,
+                buttonOptions: {
+                    verticalAlign: 'bottom'
+                }
+            },
+
+            colorAxis: {
+                min: 0
+            },
+
+            series: [{
+              data: rej_percent,
+              name: 'Rejected',
+              joinBy: ['name', 'name'],
+              states: {
+                  hover: {
+                      color: '#BADA55'
+                  }
+              },
+              dataLabels: {
+                  enabled: true,
+                  format: '{point.name}'
               }
-          },
-          dataLabels: {
-              enabled: true,
-              format: '{point.name}'
-          },
-      }]
-      });
-    }
-}
+          }]
+          });
 
-// Send request
-request.send()
+          // Create the cured chart
+          Highcharts.mapChart('cured', {
+            chart: {
+                map: 'countries/us/us-ga-all'
+            },
+
+            title: {
+                text: 'Percentage Cured by County'
+            },
+
+            subtitle: {
+                text: ''
+            },
+
+            mapNavigation: {
+                enabled: true,
+                buttonOptions: {
+                    verticalAlign: 'bottom'
+                }
+            },
+
+            colorAxis: {
+                min: 0
+            },
+
+            series: [{
+              data: cured_percent,
+              name: 'Cured',
+              joinBy: ['name', 'name'],
+              states: {
+                  hover: {
+                      color: '#BADA55'
+                  }
+              },
+              dataLabels: {
+                  enabled: true,
+                  format: '{point.name}'
+              },
+          }]
+          });
+
+          Highcharts.mapChart('accepted', {
+            chart: {
+                map: 'countries/us/us-ga-all'
+            },
+
+            title: {
+                text: 'Processed by County'
+            },
+
+            subtitle: {
+                text: ''
+            },
+
+            mapNavigation: {
+                enabled: true,
+                buttonOptions: {
+                    verticalAlign: 'bottom'
+                }
+            },
+
+            colorAxis: {
+                min: 0
+            },
+
+            series: [{
+              data: stats_data.total_processed,
+              name: 'Processed',
+              joinBy: ['name', 'name'],
+              states: {
+                  hover: {
+                      color: '#BADA55'
+                  }
+              },
+              dataLabels: {
+                  enabled: true,
+                  format: '{point.name}'
+              },
+          }]
+          });
+
+      },
+      error: function (xhr, status, error) {
+          console.log("Fail")
+      }
+    });
+});
