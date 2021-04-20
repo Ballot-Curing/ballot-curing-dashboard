@@ -60,12 +60,12 @@ window.onload = function () {
   chart.render();
 }
 
-function make_chart(data, key, value, title) {
+function make_donut_chart(data, key, value, title) {
   const app = document.getElementById('donut')
   const container = document.createElement('div')
   container.setAttribute('class', 'chart_container')
   app.appendChild(container)
-  
+
   if (data == null || data.length == 0) { 
     console.log("Null data for: " + key)
     return;

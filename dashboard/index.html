@@ -65,82 +65,83 @@
           <h1 class="h2">Dashboard</h1>
         </div>
     
-        <div>
-          <h1 class="h2">GA Senate Runoff (1/5/21)</h1>
-        </div>
+        <h1 class="h2">GA Senate Runoff (1/5/21)</h1>
         <div>
           <h3 class="h3">Today's Snapshot</h3>
         </div>
-        <!-- Quick Stats -->
-        <div id="quick_stats"></div>
 
-        <div>
-          <h3 class="h3">Maps</h3>
-        </div>
-        <!-- Map and stats -->
-
-        <div class="map_stats_container"> 
-          <div class="map_side">
-            <ul class="nav nav-pills" id="myTab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="accepted-tab" data-bs-toggle="tab" data-bs-target="#accepted" type="button" role="tab" aria-controls="Accepted" aria-selected="true">Accepted</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="rejected-tab" data-bs-toggle="tab" data-bs-target="#rejected" type="button" role="tab" aria-controls="Rejected" aria-selected="false">Rejected</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="cured-tab" data-bs-toggle="tab" data-bs-target="#cured" type="button" role="tab" aria-controls="Cured" aria-selected="false">Cured</button>
-              </li>
-            </ul>
+        <ul class="nav nav-pills" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="Overview" aria-selected="true">Overview</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="charts-tab" data-bs-toggle="tab" data-bs-target="#charts" type="button" role="tab" aria-controls="charts" aria-selected="false">Charts</button>
+          </li>
+        </ul>
   
-            <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="accepted" role="tabpanel" aria-labelledby="accepted-tab">
-                <div class="map_container">
-                  <div id="accepted" class="map"></div>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+          <!-- Quick Stats -->
+          <div id="quick_stats"></div>
+
+          <h3 class="h3">Maps</h3>
+          <!-- Map and stats -->
+
+          <div class="map_stats_container"> 
+            <div class="map_side">
+              <ul class="nav nav-pills" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="accepted-tab" data-bs-toggle="tab" data-bs-target="#accepted" type="button" role="tab" aria-controls="Accepted" aria-selected="true">Accepted</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="rejected-tab" data-bs-toggle="tab" data-bs-target="#rejected" type="button" role="tab" aria-controls="Rejected" aria-selected="false">Rejected</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="cured-tab" data-bs-toggle="tab" data-bs-target="#cured" type="button" role="tab" aria-controls="Cured" aria-selected="false">Cured</button>
+                </li>
+              </ul>
+    
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="accepted" role="tabpanel" aria-labelledby="accepted-tab">
+                  <div class="map_container">
+                    <div id="accepted" class="map"></div>
+                  </div>
                 </div>
-              </div>
-              <div class="tab-pane fade" id="cured" role="tabpanel" aria-labelledby="cured-tab">
-                <div class="map_container">
-                  <div id="cured" class="map"></div>
+                <div class="tab-pane fade" id="cured" role="tabpanel" aria-labelledby="cured-tab">
+                  <div class="map_container">
+                    <div id="cured" class="map"></div>
+                  </div>
                 </div>
-              </div>
-              <div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">
-                <div class="map_container">
-                  <div id="rejected" class="map"></div>
+                <div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">
+                  <div class="map_container">
+                    <div id="rejected" class="map"></div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          
-
-          <!-- Stats -->
-          <div class="stats_side">
-            <div id="stats"></div>
+            <!-- Stats -->
+            <div class="stats_side">
+              <div id="stats"></div>
+            </div>
           </div>
         </div>
-
-        <!-- Charts -->
-
-        <div>
+          
+        
+        <!-- Charts tab -->
+        <div class="tab-pane fade" id="charts" role="tabpanel" aria-labelledby="charts-tab">
+          
           <div>
             <h3 class="h3">Donut Chart</h3>
-          </div>
-          <div class="donutChartsContainer" id="donut">
-            <!-- <div id="donutChartContainer" class="chart_container"></div>
-            <div id="donutChart2Container" class="chart_container"></div>
-            <div id="donutChart3Container" class="chart_container"></div> -->
-
-          </div>
-
-          <div>
+            <div class="donutChartsContainer" id="donut"></div>
             <h3 class="h3">Line Chart</h3>
+            <div class="donutChartsContainer">
+              <div id="lineChartContainer" class="chart_container"></div>  
+              <div id="lineChart2Container" class="chart_container"></div>  
+            </div> 
+            
           </div>
-          <div class="donutChartsContainer">
-            <div id="lineChartContainer" class="chart_container"></div>  
-            <div id="lineChart2Container" class="chart_container"></div>  
-          </div> 
-          
         </div>
+
       </main>
     </div>
   </div>

@@ -51,28 +51,28 @@ request.onload = function () {
       })
 
       // create pie chart for ballot issues
-      make_chart(stats_data.ballot_issue_count, "ballot_issue", "ballot_issue_count", "Ballot Issues Breakdown")
+      make_donut_chart(stats_data.ballot_issue_count, "ballot_issue", "ballot_issue_count", "Ballot Issues Breakdown")
 
       // create pie chart for rejected age group
-      make_chart(stats_data.rejected_age_group, "age", "age_count", "Rejections by Age")
+      make_donut_chart(stats_data.rejected_age_group, "age", "age_count", "Rejections by Age")
 
       // create pie chart for rejected by race
-      make_chart(stats_data.rejected_race, "race", "race_count", "Rejected by Race")
+      make_donut_chart(stats_data.rejected_race, "race", "race_count", "Rejected by Race")
 
       // create pie chart for cured by race
-      make_chart(stats_data.cured_race, "race", "race_count", "Cured by Race")
+      make_donut_chart(stats_data.cured_race, "race", "race_count", "Cured by Race")
 
       // create pie chart for total race
-      make_chart(stats_data.total_race, "race", "race_count", "Total Ballots by Race")
+      make_donut_chart(stats_data.total_race, "race", "race_count", "Total Ballots by Race")
 
       // create pie chart for rejected by gender
-      make_chart(stats_data.rejected_gender, "gender", "gender_count", "Rejected by Gender")
+      make_donut_chart(stats_data.rejected_gender, "gender", "gender_count", "Rejected by Gender")
 
       // create pie chart for cured by gender
-      make_chart(stats_data.cured_gender, "gender", "gender_count", "Cured by Gender")
+      make_donut_chart(stats_data.cured_gender, "gender", "gender_count", "Cured by Gender")
 
       // create pie chart for total gender
-      make_chart(stats_data.total_gender, "gender", "gender_count", "Total Ballots by Gender")
+      make_donut_chart(stats_data.total_gender, "gender", "gender_count", "Total Ballots by Gender")
 
 
 
