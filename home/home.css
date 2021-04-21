@@ -1,0 +1,58 @@
+.boxed {
+    border: 5px solid black ;
+  }
+
+  .horizontal-center {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    bottom: 0%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+
+#flex1 {
+    display: flex; 
+    justify-content: space-evenly; 
+}
+
+.flex-items { 
+    background-color: #f4f4f4; 
+    width: 350px; 
+    height: 300px;
+    margin: 50px; 
+    text-align: center; 
+    position: relative;
+    padding: 50px;
+} 
+
+#flex2 {
+    display: flex; 
+    justify-content: space-evenly; 
+}
+
+#flex2 .flex-items { 
+    background-color: #f4f4f4; 
+    width: 500px; 
+    height: 200px;
+    margin: 50px; 
+    text-align: center; 
+    position: relative;
+    padding: 50px;
+} 
+
+#but {
+    background-color: darkred; 
+    /* position: absolute;  */
+    bottom: 0;
+    white-space: nowrap;
+    /* right: 75px; */
+}
+
+#but2 {
+    background-color: darkblue; 
+    /* position: absolute; */
+    bottom: 0;
+    /* text-align: match-parent;  */
+    /* right: 200px; */
+}
