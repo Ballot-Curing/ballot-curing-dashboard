@@ -18,8 +18,8 @@
 
 .flex-items { 
     background-color: #f4f4f4; 
-    width: 350px; 
-    height: 300px;
+    width: 35%; 
+    height: auto;
     margin: 50px; 
     text-align: center; 
     position: relative;
@@ -32,13 +32,15 @@
 }
 
 #flex2 .flex-items { 
-    background-color: #f4f4f4; 
-    width: 500px; 
-    height: 200px;
-    margin: 50px; 
-    text-align: center; 
     position: relative;
-    padding: 50px;
+    background-color: #f4f4f4; 
+    text-align: center; 
+    width: 45%; 
+    height: auto;
+    /* top: 1pt; */
+    /* height: auto;
+    margin: auto; 
+    padding: auto; */
 } 
 
 #but {
