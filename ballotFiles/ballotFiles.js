@@ -247,7 +247,6 @@ $(document).ready(function () {
           var filename = "";
           console.log(xhr.getResponseHeader('Content-Disposition'));
           var disposition = xhr.getResponseHeader('Content-Disposition');
-          //console.log(disposition.indexOf('filename'));
           if (disposition && disposition.indexOf('attachment') !== -1) {
             console.log("A");
               var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
@@ -283,15 +282,13 @@ $(document).ready(function () {
                   }
               } else {
                 console.log("G");
-                //window.location.href = downloadUrl;
+                window.location.href = downloadUrl;
               }
   
               setTimeout(function () { URL.revokeObjectURL(downloadUrl); }, 100); // cleanup
           }
       },
         error: function (xhr, textStatus, errorThrown, response) {
-          //console.log(response.url);
-
           console.log("error");
           console.log(xhr);
           console.log(textStatus);
