@@ -203,7 +203,8 @@ $(document).ready(function () {
       dataType: 'json',
       data: { state: state_val, election_dt: election_val, county: county_val, city: city_val, ballot_rtn_status: status_val, ballot_issue: issue_val },
       success: function (response) {
-        console.log(response[0].row_count);
+        $("#downloadBtn").html("Download (" + response[0].row_count + " entries)");
+        //console.log(response[0].row_count);
         $.each(response, function (i, item) {
           $("#table tbody").append(
             "<tr>"
@@ -230,8 +231,30 @@ $(document).ready(function () {
     });
 
     $("#downloadBtn").show();
+    console.log(state_val);
+    $("#downloadBtn").on("click", function () {
+      $.ajax({
+        type: 'GET',
+        url: 'http://128.220.221.36:3999/api/v1/download/',
+        dataType: 'json',
+        data: { state: state_val, election_dt: election_val, county: county_val, city: city_val, ballot_rtn_status: status_val, ballot_issue: issue_val },
+        success: function (response) {
+          console.log("success");
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          console.log("error");
+          console.log(xhr);
+          console.log(textStatus);
+          console.log(errorThrown);
+
+
+
+        }
+      })
+    });
 
   });
+
 
 
   // Reset Filters Button
