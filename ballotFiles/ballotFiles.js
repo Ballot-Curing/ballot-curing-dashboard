@@ -203,11 +203,11 @@ $(document).ready(function () {
       dataType: 'json',
       data: { state: state_val, election_dt: election_val, county: county_val, city: city_val, ballot_rtn_status: status_val, ballot_issue: issue_val },
       success: function (response) {
-        $("#downloadBtn").html("Download (" + response[0].row_count + " entries)");
+        $("#downloadBtn").html("Download File (" + response[0].row_count + " entries)");
         console.log(response.url);
 
         $.each(response, function (i, item) {
-          if (i < 0) {
+          if (i > 0) {
             $("#table tbody").append(
               "<tr>"
               + "<td>" + item.county + "</td>"
@@ -236,7 +236,12 @@ $(document).ready(function () {
 
     $("#downloadBtn").show();
     console.log(state_val);
-    $("#downloadBtn").on("click", function () {
+    $("#downloadBtn").on("click", function (event) {
+
+      // prevent multiple downloads
+      event.stopImmediatePropagation();
+
+      console.log("DOWNLOAD");
       $.ajax({
         type: 'GET',
         url: 'http://128.220.221.36:3999/api/v1/download/',
