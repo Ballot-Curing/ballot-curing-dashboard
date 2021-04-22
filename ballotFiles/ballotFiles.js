@@ -114,7 +114,7 @@ $(document).ready(function () {
         $.each(county_data, function (index, value) {
           $county_drop.append('<li><a class="dropdown-item" href="#">' + value + '</a></li>');
         });
-  
+
         // Populate City dropdown with respective cities
         var $city_drop = $("#dropdownMenuCity");
         $city_drop.empty();
@@ -204,7 +204,8 @@ $(document).ready(function () {
       data: { state: state_val, election_dt: election_val, county: county_val, city: city_val, ballot_rtn_status: status_val, ballot_issue: issue_val },
       success: function (response) {
         $("#downloadBtn").html("Download (" + response[0].row_count + " entries)");
-        //console.log(response[0].row_count);
+        console.log(response.url);
+
         $.each(response, function (i, item) {
           $("#table tbody").append(
             "<tr>"
@@ -236,19 +237,65 @@ $(document).ready(function () {
       $.ajax({
         type: 'GET',
         url: 'http://128.220.221.36:3999/api/v1/download/',
-        dataType: 'json',
+        //dataType: 'json',
         data: { state: state_val, election_dt: election_val, county: county_val, city: city_val, ballot_rtn_status: status_val, ballot_issue: issue_val },
-        success: function (response) {
-          console.log("success");
+        xhrFields: {
+          responseType: 'blob' // to avoid binary data being mangled on charset conversion
         },
-        error: function(xhr, textStatus, errorThrown) {
+        success: function(blob, status, xhr) {
+          // check for a filename
+          var filename = "";
+          console.log(xhr.getResponseHeader('Content-Disposition'));
+          var disposition = xhr.getResponseHeader('Content-Disposition');
+          //console.log(disposition.indexOf('filename'));
+          if (disposition && disposition.indexOf('attachment') !== -1) {
+            console.log("A");
+              var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+              var matches = filenameRegex.exec(disposition);
+              if (matches != null && matches[1]) filename = matches[1].replace(/['"]/g, '');
+          }
+  
+          if (typeof window.navigator.msSaveBlob !== 'undefined') {
+              // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created. These URLs will no longer resolve as the data backing the URL has been freed."
+              window.navigator.msSaveBlob(blob, filename);
+              console.log("B");
+          } else {
+              var URL = window.URL || window.webkitURL;
+              var downloadUrl = URL.createObjectURL(blob);
+              console.log(downloadUrl);
+              console.log("C");
+
+              console.log(filename);
+              if (filename) {
+                console.log("D");
+                  // use HTML5 a[download] attribute to specify filename
+                  var a = document.createElement("a");
+                  // safari doesn't support this yet
+                  if (typeof a.download === 'undefined') {
+                    console.log("E");
+                      window.location.href = downloadUrl;
+                  } else {
+                    console.log("F");
+                      a.href = downloadUrl;
+                      a.download = filename;
+                      document.body.appendChild(a);
+                      a.click();
+                  }
+              } else {
+                console.log("G");
+                //window.location.href = downloadUrl;
+              }
+  
+              setTimeout(function () { URL.revokeObjectURL(downloadUrl); }, 100); // cleanup
+          }
+      },
+        error: function (xhr, textStatus, errorThrown, response) {
+          //console.log(response.url);
+
           console.log("error");
           console.log(xhr);
           console.log(textStatus);
           console.log(errorThrown);
-
-
-
         }
       })
     });
