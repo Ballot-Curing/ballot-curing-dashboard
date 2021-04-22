@@ -1,7 +1,3 @@
-var data = [
-
-];
-
 // Get the default map
 $(document).ready(function () {
   $.ajax({
@@ -35,134 +31,55 @@ $(document).ready(function () {
             cured_percent.push(percent)
           }
 
-          // for each key of rej_data, divide by the value of each proc_data
-
-
-          // Create the rejected chart
-          Highcharts.mapChart('rejected', {
-            chart: {
-                map: 'countries/us/us-ga-all'
-            },
-
-            title: {
-                text: 'Percentage Rejected by County'
-            },
-
-            subtitle: {
-                text: ''
-            },
-
-            mapNavigation: {
-                enabled: true,
-                buttonOptions: {
-                    verticalAlign: 'bottom'
-                }
-            },
-
-            colorAxis: {
-                min: 0
-            },
-
-            series: [{
-              data: rej_percent,
-              name: 'Rejected',
-              joinBy: ['name', 'name'],
-              states: {
-                  hover: {
-                      color: '#BADA55'
-                  }
-              },
-              dataLabels: {
-                  enabled: true,
-                  format: '{point.name}'
-              }
-          }]
-          });
-
-          // Create the cured chart
-          Highcharts.mapChart('cured', {
-            chart: {
-                map: 'countries/us/us-ga-all'
-            },
-
-            title: {
-                text: 'Percentage Cured by County'
-            },
-
-            subtitle: {
-                text: ''
-            },
-
-            mapNavigation: {
-                enabled: true,
-                buttonOptions: {
-                    verticalAlign: 'bottom'
-                }
-            },
-
-            colorAxis: {
-                min: 0
-            },
-
-            series: [{
-              data: cured_percent,
-              name: 'Cured',
-              joinBy: ['name', 'name'],
-              states: {
-                  hover: {
-                      color: '#BADA55'
-                  }
-              },
-              dataLabels: {
-                  enabled: true,
-                  format: '{point.name}'
-              },
-          }]
-          });
-
-          Highcharts.mapChart('accepted', {
-            chart: {
-                map: 'countries/us/us-ga-all'
-            },
-
-            title: {
-                text: 'Processed by County'
-            },
-
-            subtitle: {
-                text: ''
-            },
-
-            mapNavigation: {
-                enabled: true,
-                buttonOptions: {
-                    verticalAlign: 'bottom'
-                }
-            },
-
-            colorAxis: {
-                min: 0
-            },
-
-            series: [{
-              data: stats_data.total_processed,
-              name: 'Processed',
-              joinBy: ['name', 'name'],
-              states: {
-                  hover: {
-                      color: '#BADA55'
-                  }
-              },
-              dataLabels: {
-                  enabled: true,
-                  format: '{point.name}'
-              },
-          }]
-          });
-
+          make_map("rejected", "countries/us/us-ga-all", "Percentage Rejected by County", rej_percent)
+          make_map("cured", "countries/us/us-ga-all", "Percentage Cured by County", cured_percent)
+          make_map("processed", "countries/us/us-ga-all", "Processed by County", stats_data.total_processed)
+        
       },
       error: function (xhr, status, error) {
           console.log("Fail")
       }
     });
 });
+
+function make_map(div, map, title, data) {
+  Highcharts.mapChart(div, {
+    chart: {
+        map: map
+    },
+
+    title: {
+        text: title
+    },
+
+    subtitle: {
+        text: ''
+    },
+
+    mapNavigation: {
+        enabled: true,
+        buttonOptions: {
+            verticalAlign: 'bottom'
+        }
+    },
+
+    colorAxis: {
+        min: 0
+    },
+
+    series: [{
+      data: data,
+      name: div,
+      joinBy: ['name', 'name'],
+      states: {
+          hover: {
+              color: '#BADA55'
+          }
+      },
+      dataLabels: {
+          enabled: true,
+          format: '{point.name}'
+      }
+  }]
+  });
+}

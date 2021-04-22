@@ -62,13 +62,11 @@
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Dashboard</h1>
+          <h1 class="h1">Dashboard</h1>
         </div>
-    
         <h1 class="h2">GA Senate Runoff (1/5/21)</h1>
-        <div>
-          <h3 class="h3">Today's Snapshot</h3>
-        </div>
+        <h3 class="h3">Today's Snapshot</h3>
+        <!-- <div class="donutChartsContainer" id="barChart"></div>      -->
 
         <ul class="nav nav-pills" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
@@ -83,7 +81,7 @@
           <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
           <!-- Quick Stats -->
           <div id="quick_stats"></div>
-
+          
           <h3 class="h3">Maps</h3>
           <!-- Map and stats -->
 
@@ -91,7 +89,7 @@
             <div class="map_side">
               <ul class="nav nav-pills" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="accepted-tab" data-bs-toggle="tab" data-bs-target="#accepted" type="button" role="tab" aria-controls="Accepted" aria-selected="true">Accepted</button>
+                  <button class="nav-link active" id="processed-tab" data-bs-toggle="tab" data-bs-target="#processed" type="button" role="tab" aria-controls="Processed" aria-selected="true">Processed</button>
                 </li>
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" id="rejected-tab" data-bs-toggle="tab" data-bs-target="#rejected" type="button" role="tab" aria-controls="Rejected" aria-selected="false">Rejected</button>
@@ -102,9 +100,9 @@
               </ul>
     
               <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="accepted" role="tabpanel" aria-labelledby="accepted-tab">
+                <div class="tab-pane fade show active" id="processed" role="tabpanel" aria-labelledby="processed-tab">
                   <div class="map_container">
-                    <div id="accepted" class="map"></div>
+                    <div id="processed" class="map"></div>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="cured" role="tabpanel" aria-labelledby="cured-tab">
@@ -123,6 +121,8 @@
             <div class="stats_side">
               <div id="stats"></div>
             </div>
+            
+
           </div>
         </div>
           
@@ -134,11 +134,8 @@
             <h3 class="h3">Donut Chart</h3>
             <div class="donutChartsContainer" id="donut"></div>
             <h3 class="h3">Line Chart</h3>
-            <div class="donutChartsContainer">
-              <div id="lineChartContainer" class="chart_container"></div>  
-              <div id="lineChart2Container" class="chart_container"></div>  
-            </div> 
-            
+            <div class="donutChartsContainer" id="line"></div> 
+             
           </div>
         </div>
 
@@ -147,7 +144,6 @@
   </div>
 
 <script src="dashboard.js"></script>
-<script src="accepted_map.js"></script> <!-- Georgia Accepted Map -->
 <script src="map.js"></script> <!-- Georgia Rejected Map -->
 <script src="stats.js"></script> <!-- Stats pane -->
 
