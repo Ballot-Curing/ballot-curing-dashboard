@@ -203,7 +203,7 @@ $(document).ready(function () {
       dataType: 'json',
       data: { state: state_val, election_dt: election_val, county: county_val, city: city_val, ballot_rtn_status: status_val, ballot_issue: issue_val },
       success: function (response) {
-        console.log(response.length);
+        console.log(response[0].row_count);
         $.each(response, function (i, item) {
           $("#table tbody").append(
             "<tr>"
@@ -256,6 +256,7 @@ $(document).ready(function () {
     $("#cityInput").val('');
     $("#issueInput").val('');
 
+    $("#downloadBtn").html('Download');
     $("#downloadBtn").hide();
     $("#table tbody").empty();
     $("#table tbody").hide();
