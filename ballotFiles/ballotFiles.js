@@ -326,7 +326,7 @@ $(document).ready(function () {
     $("#cityInput").val('');
     $("#issueInput").val('');
 
-    $("#downloadBtn").html('Download');
+    $("#downloadBtn").html('Download File');
     $("#downloadBtn").hide();
     $("#table tbody").empty();
     $("#table tbody").hide();
