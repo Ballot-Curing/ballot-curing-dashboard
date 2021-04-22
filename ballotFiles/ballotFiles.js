@@ -219,7 +219,7 @@ $(document).ready(function () {
             + "</tr>")
         })
 
-        if (response.length == 0) {
+        if (response[0].row_count == 0) {
           console.log("zero");
           $("#table tbody").append('<tr><td colspan="7" style="text-align: center;">No matching records found</td></tr>');
         }
