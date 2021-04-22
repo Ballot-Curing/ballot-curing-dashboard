@@ -207,17 +207,20 @@ $(document).ready(function () {
         console.log(response.url);
 
         $.each(response, function (i, item) {
-          $("#table tbody").append(
-            "<tr>"
-            + "<td>" + item.county + "</td>"
-            + "<td>" + item.voter_reg_id + "</td>"
-            + "<td>" + item.city + "</td>"
-            + "<td>" + item.state + "</td>"
-            + "<td>" + item.zip + "</td>"
-            + "<td>" + item.ballot_rtn_status + "</td>"
-            + "<td>" + item.ballot_issue + "</td>"
-            + "</tr>")
+          if (i < 0) {
+            $("#table tbody").append(
+              "<tr>"
+              + "<td>" + item.county + "</td>"
+              + "<td>" + item.voter_reg_id + "</td>"
+              + "<td>" + item.city + "</td>"
+              + "<td>" + item.state + "</td>"
+              + "<td>" + item.zip + "</td>"
+              + "<td>" + item.ballot_rtn_status + "</td>"
+              + "<td>" + item.ballot_issue + "</td>"
+              + "</tr>")
+          }
         })
+
 
         if (response[0].row_count == 0) {
           console.log("zero");
