@@ -1,10 +1,12 @@
 // Get the default map
 $(document).ready(function () {
+  document.getElementById("loading").style.visibility='visible';
   $.ajax({
       type: "GET",
       url: "http://128.220.221.36:5500/api/v1/stats/county_stats/?state=ga&election_dt=01-04-2021",
       dataType: "json",
       success: function (result, status, xhr) {
+        document.getElementById("loading").style.visibility='hidden';
           var stats_data = result
           rej_percent = []
           for (index in stats_data.total_rejected) {

@@ -63,8 +63,21 @@
         <div
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h1">Dashboard</h1>
+
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <select id="election-btn" onclick="pressButton()">
+              <option value="GA Senate Runoff (1/5/21)" selected="selected">GA Senate Runoff (1/5/21)</option>
+              <option value="NC General Election (11/3/20)">NC General Election (11/3/20)</option>
+            </select>
+
+          </div>
+
         </div>
-        <h1 class="h2">GA Senate Runoff (1/5/21)</h1>
+        <div class="loader" id="loading"></div>
+        <div id="election-title">
+          <h2 class="h2" id="election">GA Senate Runoff (1/5/21)</h2>
+        </div>
+        
         <h3 class="h3">Today's Snapshot</h3>
         <!-- <div class="donutChartsContainer" id="barChart"></div>      -->
 

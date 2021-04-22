@@ -88,3 +88,14 @@ $(document).ready(function () {
       }
     });
 });
+
+function pressButton() {
+  const e = document.getElementById("election-btn");
+  const title = document.getElementById('election-title')
+  const header = document.createElement('h2')
+  header.setAttribute('class', 'h2')
+  header.setAttribute('id', 'election')
+  header.textContent = e.value
+
+  title.replaceChild(header, document.getElementById('election'))
+}
