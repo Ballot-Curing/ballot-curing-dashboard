@@ -1,156 +1,111 @@
-function make_bar_chart(processed, rejected, cured) {
-  const app = document.getElementById('barChart')
-  const container = document.createElement('div')
-  container.setAttribute('class', 'chart_container')
-  app.appendChild(container)
+// main file for user actions
 
-  let data_rej = []
-  for (i = 0; i < rejected.length; i++) {
-    test = {y: rejected[i]["race_count"], label: rejected[i]["race"]}
-    data_rej.push(test)
-  }
+var state = "nc"
+// var state = "ga"
 
-  let data_cured = []
-  for (i = 0; i < cured.length; i++) {
-    test = {y: cured[i]["race_count"], label: cured[i]["race"]}
-    data_cured.push(test)
-  }
-  // TODO: not same length or order
-  console.log(cured)
-  console.log(rejected)
+var election_dt = "11-03-2020"
+// var election_dt = "01-04-2021"
 
+$(document).ready(function () {
+  document.getElementById("loading").style.visibility='visible';
 
-  var chart = new CanvasJS.Chart(container, {
-    animationEnabled: true,
-    title:{
-      text: "% Rejected Ballots By Race"
-    },
-    axisY: {
-      title: "Ballots",
-      includeZero: true
-    },
-    legend: {
-      cursor:"pointer",
-      itemclick : toggleDataSeries
-    },
-    toolTip: {
-      shared: true,
-      content: toolTipFormatter
-    },
-    data: [{
-      type: "bar",
-      showInLegend: true,
-      name: "Rejected",
-      color: "red",
-      dataPoints: data_rej
-    },
-    {
-      type: "bar",
-      showInLegend: true,
-      name: "Cured",
-      color: "blue",
-      dataPoints: data_cured
-    }
-    ]
-  });
-  chart.render();
-}
+  $.ajax({
+      type: "GET",
+      url: "http://128.220.221.36:5500/api/v1/stats/county_stats/?state=" + state + "&election_dt=" + election_dt,
+      dataType: "json",
+      success: function (result, status, xhr) {
+        document.getElementById("loading").style.visibility='hidden';
+        var stats_data = result
+        rej_percent = []
 
+        console.log(stats_data.total_rejected)
+        for (index in stats_data.total_rejected) {
+          if (stats_data.total_processed[index]["value"] == 0) {
+            continue;
+          }
+          percent = {
+            "name": stats_data.total_rejected[index]["name"],
+            "value": 100 * stats_data.total_rejected[index]["value"] / stats_data.total_processed[index]["value"]
+          }
+          rej_percent.push(percent)
+        }
 
-function toolTipFormatter(e) {
-	var str = "";
-	var total = 0 ;
-	var str3;
-	var str2 ;
-	for (var i = 0; i < e.entries.length; i++){
-		var str1 = "<span style= \"color:"+e.entries[i].dataSeries.color + "\">" + e.entries[i].dataSeries.name + "</span>: <strong>"+  e.entries[i].dataPoint.y + "</strong> <br/>" ;
-		total = e.entries[i].dataPoint.y + total;
-		str = str.concat(str1);
-	}
-	str2 = "<strong>" + e.entries[0].dataPoint.label + "</strong> <br/>";
-	str3 = "<span style = \"color:Tomato\">Total: </span><strong>" + total + "</strong><br/>";
-	return (str2.concat(str)).concat(str3);
-}
+        cured_percent = []
+        for (index in stats_data.total_cured) {
+          if (stats_data.total_rejected[index]["value"] == 0) {
+            continue;
+          }
 
-function toggleDataSeries(e) {
-	if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-		e.dataSeries.visible = false;
-	}
-	else {
-		e.dataSeries.visible = true;
-	}
-	chart.render();
-}
+          percent = {
+            "name": stats_data.total_cured[index]["name"],
+            "value": 100 * stats_data.total_cured[index]["value"] / stats_data.total_processed[index]["value"]
+          }
+          cured_percent.push(percent)
+        }
 
-
-
-function make_donut_chart(data, key, value, title) {
-  const app = document.getElementById('donut')
-  const container = document.createElement('div')
-  container.setAttribute('class', 'chart_container')
-  app.appendChild(container)
-
-  if (data == null || data.length == 0) { 
-    console.log("Null data for: " + key)
-    return;
-  }
-  
-  let test = []
-  for (i in data) {
-    test.push({y: data[i][value], indexLabel: data[i][key]})
-  }
-
-  var donutChart = new CanvasJS.Chart(container,
-  {
-    animationEnabled: true,
-    title:{
-      text: title
-    },
-    data: [
-    {
-     type: "doughnut",
-     dataPoints: test
-   }
-   ]
- });
-
-  donutChart.render();
-}
-
-
-function make_line_chart(data, title) {
-  const app = document.getElementById('line')
-  const container = document.createElement('div')
-  container.setAttribute('class', 'chart_container')
-  app.appendChild(container)
-
-  var chart = new CanvasJS.Chart(container,
-    {
-      animationEnabled: true,
-      title:{
-      text: title
+        make_map("rejected", "countries/us/us-" + state + "-all", "Percentage Rejected by County", rej_percent)
+        make_map("cured", "countries/us/us-" + state + "-all", "Percentage Cured by County", cured_percent)
+        make_map("processed", "countries/us/us-" + state + "-all", "Processed by County", stats_data.total_processed)
+        
       },
-      data: [
-      {
-        type: "line",
-
-        dataPoints: [
-        { x: new Date(2012, 00, 1), y: 450 },
-        { x: new Date(2012, 01, 1), y: 414 },
-        { x: new Date(2012, 02, 1), y: 520 },
-        { x: new Date(2012, 03, 1), y: 460 },
-        { x: new Date(2012, 04, 1), y: 450 },
-        { x: new Date(2012, 05, 1), y: 500 },
-        { x: new Date(2012, 06, 1), y: 480 },
-        { x: new Date(2012, 07, 1), y: 480 },
-        { x: new Date(2012, 08, 1), y: 410 },
-        { x: new Date(2012, 09, 1), y: 500 },
-        { x: new Date(2012, 10, 1), y: 480 },
-        { x: new Date(2012, 11, 1), y: 510 }
-        ]
+      error: function (xhr, status, error) {
+          console.log("Fail")
       }
-    ]
-  });
+    });
 
-  chart.render();
-}
+  $.ajax({
+    type: "GET",
+    url: "http://128.220.221.36:5500/api/v1/stats/?state=" + state + "&election_dt=" + election_dt,
+    dataType: "json",
+    success: function (result, status, xhr) {
+      stats_data = result
+
+      quick_stats = [
+        ['Total processed', stats_data.total_processed],
+        ['Total rejected', stats_data.total_rejected],
+        ['Total cured', stats_data.total_cured],
+      ]
+
+      stats = [
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+
+      ]
+
+      quick_stats.forEach((stat) => {
+        const card = document.createElement('div')
+        card.setAttribute('class', 'quick_card')
+        quick_stats_container.appendChild(card)
+        create_stat(card, stat[0], stat[1])
+      })
+
+      stats.forEach((stat) => {
+        const card = document.createElement('div')
+        card.setAttribute('class', 'card')
+        container.appendChild(card)
+        create_stat(card, stat[0], stat[1])
+      })
+
+      // create pie charts
+      make_donut_chart(stats_data.ballot_issue_count, "ballot_issue", "ballot_issue_count", "Ballot Issues Breakdown")
+      make_donut_chart(stats_data.rejected_age_group, "age", "age_count", "Rejections by Age")
+      make_donut_chart(stats_data.rejected_race, "race", "race_count", "Rejected by Race")
+      make_donut_chart(stats_data.cured_race, "race", "race_count", "Cured by Race")
+      make_donut_chart(stats_data.total_race, "race", "race_count", "Total Ballots by Race")
+      make_donut_chart(stats_data.rejected_gender, "gender", "gender_count", "Rejected by Gender")
+      make_donut_chart(stats_data.cured_gender, "gender", "gender_count", "Cured by Gender")
+      make_donut_chart(stats_data.total_gender, "gender", "gender_count", "Total Ballots by Gender")
+      
+      // create line charts
+      make_line_chart(stats_data.total_gender, "Cured Ballots over time")
+      make_line_chart(stats_data.total_gender, "Rejected Ballots over time")
+      // make_bar_chart(stats_data.total_race, stats_data.rejected_race, stats_data.cured_race)
+
+    },
+    error: function (xhr, status, error) {
+      console.log("Getting stats failed")
+    }
+  });
+});
