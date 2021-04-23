@@ -1,12 +1,51 @@
 // main file for user actions
 
-var state = "nc"
-// var state = "ga"
 
-var election_dt = "11-03-2020"
-// var election_dt = "01-04-2021"
+elections = {
+  "NC General Election (11/3/20)" : {
+    "state": "nc",
+    "election_dt": "11-03-2020"
+  },
+  "GA Senate Runoff (1/5/21)" : {
+    "state": "ga",
+    "election_dt": "01-04-2021"
+  }
+}
 
+// Default
 $(document).ready(function () {
+  render_election_data("ga", "01-04-2021");
+});
+
+function pressButton() {
+  // clear contents of old stuff
+  $("#quick_stats").empty();
+  $("#stats").empty();
+  $("#donut").empty();
+  $("#line").empty();
+
+  render_election_data("nc", "11-03-2020")
+}
+
+
+function render_election_data(state, election_dt) {
+  const e = document.getElementById("election-btn");
+  const title = document.getElementById('election-title')
+  const header = document.createElement('h2')
+  header.setAttribute('class', 'h2')
+  header.setAttribute('id', 'election')
+  header.textContent = e.value
+  const app = document.getElementById('stats')
+  const container = document.createElement('div')
+  container.setAttribute('class', 'flex_container')
+  app.appendChild(container)
+
+  const quick_stats_app = document.getElementById('quick_stats')
+  const quick_stats_container = document.createElement('div')
+  quick_stats_container.setAttribute('class', 'flex_container')
+  quick_stats_app.appendChild(quick_stats_container)
+
+  title.replaceChild(header, document.getElementById('election'))
   document.getElementById("loading").style.visibility='visible';
 
   $.ajax({
@@ -18,7 +57,6 @@ $(document).ready(function () {
         var stats_data = result
         rej_percent = []
 
-        console.log(stats_data.total_rejected)
         for (index in stats_data.total_rejected) {
           if (stats_data.total_processed[index]["value"] == 0) {
             continue;
@@ -73,7 +111,7 @@ $(document).ready(function () {
         ['Dummy', stats_data.total_cured],
 
       ]
-
+      
       quick_stats.forEach((stat) => {
         const card = document.createElement('div')
         card.setAttribute('class', 'quick_card')
@@ -108,4 +146,4 @@ $(document).ready(function () {
       console.log("Getting stats failed")
     }
   });
-});
+}
