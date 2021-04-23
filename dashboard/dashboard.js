@@ -24,17 +24,25 @@ function pressButton() {
   $("#donut").empty();
   $("#line").empty();
 
-  render_election_data("nc", "11-03-2020")
-}
-
-
-function render_election_data(state, election_dt) {
   const e = document.getElementById("election-btn");
   const title = document.getElementById('election-title')
   const header = document.createElement('h2')
   header.setAttribute('class', 'h2')
   header.setAttribute('id', 'election')
   header.textContent = e.value
+  title.replaceChild(header, document.getElementById('election'))
+
+  render_election_data(elections[e.value].state, elections[e.value].election_dt)
+}
+
+
+function render_election_data(state, election_dt) {
+  // const e = document.getElementById("election-btn");
+  // const title = document.getElementById('election-title')
+  // const header = document.createElement('h2')
+  // header.setAttribute('class', 'h2')
+  // header.setAttribute('id', 'election')
+  // header.textContent = e.value
   const app = document.getElementById('stats')
   const container = document.createElement('div')
   container.setAttribute('class', 'flex_container')
@@ -45,7 +53,7 @@ function render_election_data(state, election_dt) {
   quick_stats_container.setAttribute('class', 'flex_container')
   quick_stats_app.appendChild(quick_stats_container)
 
-  title.replaceChild(header, document.getElementById('election'))
+  
   document.getElementById("loading").style.visibility='visible';
 
   $.ajax({
@@ -87,7 +95,8 @@ function render_election_data(state, election_dt) {
         
       },
       error: function (xhr, status, error) {
-          console.log("Fail")
+        document.getElementById("loading").style.visibility='hidden';
+        console.log("Fail")
       }
     });
 
