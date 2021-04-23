@@ -1,41 +1,50 @@
 // Get the default map
 $(document).ready(function () {
   document.getElementById("loading").style.visibility='visible';
+
+  // var state = "nc"
+  var state = "ga"
+
+  // var election_dt = "11-03-2020"
+  var election_dt = "01-04-2021"
+
   $.ajax({
       type: "GET",
-      url: "http://128.220.221.36:5500/api/v1/stats/county_stats/?state=ga&election_dt=01-04-2021",
+      url: "http://128.220.221.36:5500/api/v1/stats/county_stats/?state=" + state + "&election_dt=" + election_dt,
       dataType: "json",
       success: function (result, status, xhr) {
         document.getElementById("loading").style.visibility='hidden';
-          var stats_data = result
-          rej_percent = []
-          for (index in stats_data.total_rejected) {
-            if (stats_data.total_processed[index]["value"] == 0) {
-              continue;
-            }
-            percent = {
-              "name": stats_data.total_rejected[index]["name"],
-              "value": 100 * stats_data.total_rejected[index]["value"] / stats_data.total_processed[index]["value"]
-            }
-            rej_percent.push(percent)
+        var stats_data = result
+        rej_percent = []
+
+        console.log(stats_data.total_rejected)
+        for (index in stats_data.total_rejected) {
+          if (stats_data.total_processed[index]["value"] == 0) {
+            continue;
+          }
+          percent = {
+            "name": stats_data.total_rejected[index]["name"],
+            "value": 100 * stats_data.total_rejected[index]["value"] / stats_data.total_processed[index]["value"]
+          }
+          rej_percent.push(percent)
+        }
+
+        cured_percent = []
+        for (index in stats_data.total_cured) {
+          if (stats_data.total_rejected[index]["value"] == 0) {
+            continue;
           }
 
-          cured_percent = []
-          for (index in stats_data.total_cured) {
-            if (stats_data.total_rejected[index]["value"] == 0) {
-              continue;
-            }
-
-            percent = {
-              "name": stats_data.total_cured[index]["name"],
-              "value": 100 * stats_data.total_cured[index]["value"] / stats_data.total_rejected[index]["value"]
-            }
-            cured_percent.push(percent)
+          percent = {
+            "name": stats_data.total_cured[index]["name"],
+            "value": 100 * stats_data.total_cured[index]["value"] / stats_data.total_processed[index]["value"]
           }
-
-          make_map("rejected", "countries/us/us-ga-all", "Percentage Rejected by County", rej_percent)
-          make_map("cured", "countries/us/us-ga-all", "Percentage Cured by County", cured_percent)
-          make_map("processed", "countries/us/us-ga-all", "Processed by County", stats_data.total_processed)
+          cured_percent.push(percent)
+        }
+        // countries/us/us-nc-all
+        make_map("rejected", "countries/us/us-" + state + "-all", "Percentage Rejected by County", rej_percent)
+        make_map("cured", "countries/us/us-" + state + "-all", "Percentage Cured by County", cured_percent)
+        make_map("processed", "countries/us/us-" + state + "-all", "Processed by County", stats_data.total_processed)
         
       },
       error: function (xhr, status, error) {
