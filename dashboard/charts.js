@@ -36,6 +36,7 @@ function make_bar_chart(rejected, cured, label, name, title) {
 
   var chart = new CanvasJS.Chart(container, {
     theme: "light2",
+    animationDuration: 2000,
     animationEnabled: true,
     title:{
       text: title
@@ -106,6 +107,7 @@ function make_donut_chart(data, key, value, title, div="donut") {
   var donutChart = new CanvasJS.Chart(container,
   {
     theme: "light2",
+    animationDuration: 2000,
     animationEnabled: true,
     title:{
       text: title
@@ -131,6 +133,7 @@ function make_line_chart(data, title) {
   var chart = new CanvasJS.Chart(container,
     {
       theme: "light2",
+      animationDuration: 2000,
       animationEnabled: true,
       title:{
       text: title
