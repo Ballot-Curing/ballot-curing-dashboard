@@ -1,5 +1,5 @@
 .map_container {
-  background-color: rgba(0, 44, 165, 0.1);
+  /* background-color: rgba(0, 44, 165, 0.1); */
   margin-top: 20px;
 }
 
@@ -9,13 +9,13 @@
 }
 
 .map_side {
-  background-color: green;
+  /* background-color: green; */
   min-width: 500px;
   margin-right: 20px;
 }
 
 .stats_side {
-  background-color: red;
+  /* background-color: red; */
   min-width: 100px;
 }
 
@@ -50,7 +50,7 @@
 
 .flex_container {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: flex-start;
-  background-color: rgba(0, 44, 165, 0.1);
+  /* background-color: rgba(0, 44, 165, 0.1); */
 }

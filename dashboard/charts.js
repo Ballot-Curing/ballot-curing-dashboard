@@ -6,21 +6,18 @@ function make_bar_chart(processed, rejected, cured) {
   container.setAttribute('class', 'chart_container')
   app.appendChild(container)
 
-  let data_rej = []
+  let rej_map = {}
   for (i = 0; i < rejected.length; i++) {
-    test = {y: rejected[i]["race_count"], label: rejected[i]["race"]}
-    data_rej.push(test)
+    rej_map[rejected[i]["race"]] = rejected[i]["race_count"]
   }
 
-  let data_cured = []
+  let cured_map = {}
   for (i = 0; i < cured.length; i++) {
-    test = {y: cured[i]["race_count"], label: cured[i]["race"]}
-    data_cured.push(test)
+    cured_map[cured[i]["race"]] = cured[i]["race_count"]
   }
   // TODO: not same length or order
-  console.log(cured)
-  console.log(rejected)
-
+  console.log(cured_map)
+  console.log(rej_map)
 
   var chart = new CanvasJS.Chart(container, {
     animationEnabled: true,
@@ -44,14 +41,14 @@ function make_bar_chart(processed, rejected, cured) {
       showInLegend: true,
       name: "Rejected",
       color: "red",
-      dataPoints: data_rej
+      dataPoints: rej_map
     },
     {
       type: "bar",
       showInLegend: true,
       name: "Cured",
       color: "blue",
-      dataPoints: data_cured
+      dataPoints: cured_map
     }
     ]
   });
@@ -86,13 +83,13 @@ function toggleDataSeries(e) {
 
 
 
-function make_donut_chart(data, key, value, title) {
-  const app = document.getElementById('donut')
+function make_donut_chart(data, key, value, title, div="donut") {
+  const app = document.getElementById(div)
   const container = document.createElement('div')
   container.setAttribute('class', 'chart_container')
   app.appendChild(container)
 
-  if (data == null || data.length == 0) { 
+  if (data == null || data.length == 0 || data == "null") { 
     console.log("Null data for: " + key)
     return;
   }
