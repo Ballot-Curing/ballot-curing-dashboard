@@ -58,6 +58,25 @@ function render_election_data(state, election_dt) {
       }
     });
 
+    $.ajax({
+      type: "GET",
+      url: "http://128.220.221.36:5500/api/v1/lastProcessed/?state=" + state + "&election_dt=" + election_dt,
+      dataType: "json",
+      success: function (result, status, xhr) {
+
+        const last_proc_app = document.getElementById('last-processed')
+        const last_proc_container = document.createElement('div')
+        last_proc_container.setAttribute('class', 'flex_container')
+        last_proc_app.appendChild(last_proc_container)
+        last_proc_container.textContent = "Last updated: " + result.last_proc
+
+      },
+      error: function (xhr, status, error) {
+        console.log("Could not get last updated date: " + status + ", error: " + error)
+      }
+    });
+
+    
   $.ajax({
     type: "GET",
     url: "http://128.220.221.36:5500/api/v1/stats/?state=" + state + "&election_dt=" + election_dt,
@@ -96,16 +115,17 @@ function render_election_data(state, election_dt) {
 
       // create pie charts
       make_donut_chart(stats_data.rejected_age_group, "age", "age_count", "Rejections by Age")
-      make_donut_chart(stats_data.rejected_race, "race", "race_count", "Rejected by Race")
-      make_donut_chart(stats_data.cured_race, "race", "race_count", "Cured by Race")
       make_donut_chart(stats_data.total_race, "race", "race_count", "Total Ballots by Race")
-      make_donut_chart(stats_data.rejected_gender, "gender", "gender_count", "Rejected by Gender")
-      make_donut_chart(stats_data.cured_gender, "gender", "gender_count", "Cured by Gender")
       make_donut_chart(stats_data.total_gender, "gender", "gender_count", "Total Ballots by Gender")
       
       // create line charts
       make_line_chart(stats_data.total_gender, "Rejected Ballots over time")
-      make_bar_chart(stats_data.total_race, stats_data.rejected_race, stats_data.cured_race)
+
+      // create bar charts
+      // make_bar_chart(stats_data.total_race, stats_data.rejected_race, stats_data.cured_race)
+      make_bar_chart(stats_data.rejected_race, stats_data.cured_race, "race_count", "race", "% Cured Ballots By Race")
+      make_bar_chart(stats_data.rejected_gender, stats_data.cured_gender, "gender_count", "gender", "% Cured Ballots By Gender")
+
 
     },
     error: function (xhr, status, error) {

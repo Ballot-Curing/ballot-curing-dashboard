@@ -21,8 +21,10 @@ function pressButton() {
   $("#quick_stats").empty();
   $("#stats").empty();
   $("#donut").empty();
+  $("#barChart").empty();
   $("#ballot_issues").empty();
   $("#line").empty();
+  $("#last-processed").empty();
 
   const e = document.getElementById("election-btn");
   const title = document.getElementById('election-title')

@@ -1,6 +1,6 @@
 // Contains helper functions to generate charts
 
-function make_bar_chart(processed, rejected, cured) {
+function make_bar_chart(rejected, cured, label, name, title) {
   const app = document.getElementById('barChart')
   const container = document.createElement('div')
   container.setAttribute('class', 'chart_container')
@@ -8,21 +8,36 @@ function make_bar_chart(processed, rejected, cured) {
 
   let rej_map = {}
   for (i = 0; i < rejected.length; i++) {
-    rej_map[rejected[i]["race"]] = rejected[i]["race_count"]
+    rej_map[rejected[i][name]] = rejected[i][label]
   }
 
   let cured_map = {}
   for (i = 0; i < cured.length; i++) {
-    cured_map[cured[i]["race"]] = cured[i]["race_count"]
+    if (cured[i][label] == NaN) {
+      continue;
+    }
+    cured_map[cured[i][name]] = cured[i][label]
   }
-  // TODO: not same length or order
-  console.log(cured_map)
-  console.log(rej_map)
+  
+  percent_cured = []
+  
+  for (race in cured_map) {
+    if (rej_map[race] == null || cured_map[race] == null) {
+      continue
+    }
+
+    percent_cured.push({
+      y: Number((cured_map[race] / (cured_map[race] + rej_map[race])).toFixed(2)),
+      label: race
+    })
+  }
+
+  console.log(percent_cured)
 
   var chart = new CanvasJS.Chart(container, {
     animationEnabled: true,
     title:{
-      text: "% Rejected Ballots By Race"
+      text: title
     },
     axisY: {
       title: "Ballots",
@@ -32,23 +47,11 @@ function make_bar_chart(processed, rejected, cured) {
       cursor:"pointer",
       itemclick : toggleDataSeries
     },
-    toolTip: {
-      shared: true,
-      content: toolTipFormatter
-    },
     data: [{
       type: "bar",
       showInLegend: true,
-      name: "Rejected",
-      color: "red",
-      dataPoints: rej_map
-    },
-    {
-      type: "bar",
-      showInLegend: true,
-      name: "Cured",
-      color: "blue",
-      dataPoints: cured_map
+      name: title,
+      dataPoints: percent_cured
     }
     ]
   });
