@@ -93,6 +93,7 @@ function render_election_data(state, election_dt) {
       stats = [
         ['Dummy', stats_data.total_cured],
         ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
 
       ]
       
@@ -122,10 +123,9 @@ function render_election_data(state, election_dt) {
       make_line_chart(stats_data.total_gender, "Rejected Ballots over time")
 
       // create bar charts
-      // make_bar_chart(stats_data.total_race, stats_data.rejected_race, stats_data.cured_race)
       make_bar_chart(stats_data.rejected_race, stats_data.cured_race, "race_count", "race", "% Cured Ballots By Race")
       make_bar_chart(stats_data.rejected_gender, stats_data.cured_gender, "gender_count", "gender", "% Cured Ballots By Gender")
-
+      make_bar_chart(stats_data.rejected_age_group, stats_data.cured_age_group, "age_count", "age", "% Cured Ballots By Age Group")
 
     },
     error: function (xhr, status, error) {

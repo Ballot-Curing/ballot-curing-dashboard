@@ -120,6 +120,7 @@ body {
 .chart_container {
   height: 350px; 
   width: 600px;
+  margin-bottom: 50px;
 }
 
 .loader {
