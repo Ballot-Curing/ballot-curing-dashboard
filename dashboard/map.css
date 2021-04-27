@@ -1,0 +1,56 @@
+.map_container {
+  /* background-color: rgba(0, 44, 165, 0.1); */
+  margin-top: 20px;
+}
+
+.map_stats_container {
+  display: flex;
+  /* flex-wrap: wrap; */
+}
+
+.map_side {
+  /* background-color: green; */
+  min-width: 500px;
+  margin-right: 20px;
+}
+
+.stats_side {
+  /* background-color: red; */
+  min-width: 100px;
+}
+
+.map {
+  height: 500px; 
+  width: 500px; 
+}
+
+.card {
+  width: 200px; 
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color: darkblue;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.quick_card {
+  width: 400px; 
+  margin: 10px;
+  background-color: salmon;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+
+.stats_value {
+  font-size: 40px;
+}
+
+.flex_container {
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: flex-start;
+  /* background-color: rgba(0, 44, 165, 0.1); */
+}

@@ -1,80 +1,115 @@
-/* globals Chart:false, feather:false */
+// Contains helper file for generating dashboard data
 
-(function () {
-  'use strict'
+function render_election_data(state, election_dt) {
+  const app = document.getElementById('stats')
+  const container = document.createElement('div')
+  container.setAttribute('class', 'flex_container')
+  app.appendChild(container)
 
-  feather.replace()
+  const quick_stats_app = document.getElementById('quick_stats')
+  const quick_stats_container = document.createElement('div')
+  quick_stats_container.setAttribute('class', 'flex_container')
+  quick_stats_app.appendChild(quick_stats_container)
 
-  // Graphs
-  var ctx = document.getElementById('lineChart')
   
+  document.getElementById("loading").style.visibility='visible';
 
+  $.ajax({
+      type: "GET",
+      url: "http://128.220.221.36:5500/api/v1/stats/county_stats/?state=" + state + "&election_dt=" + election_dt,
+      dataType: "json",
+      success: function (result, status, xhr) {
+        document.getElementById("loading").style.visibility='hidden';
+        var stats_data = result
+        rej_percent = []
 
-  // eslint-disable-next-line no-unused-vars
-  var lineChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday'
-      ],
-      datasets: [{
-        data: [
-          15339,
-          21345,
-          18483,
-          24003,
-          23489,
-          24092,
-          12034
-        ],
-        lineTension: 0,
-        backgroundColor: 'transparent',
-        borderColor: '#007bff',
-        borderWidth: 4,
-        pointBackgroundColor: '#007bff'
-      }]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: false
+        for (index in stats_data.total_rejected) {
+          if (stats_data.total_processed[index]["value"] == 0) {
+            continue;
           }
-        }]
-      },
-      legend: {
-        display: false
-      }
-    }
-  })
+          percent = {
+            "name": stats_data.total_rejected[index]["name"],
+            "value": 100 * stats_data.total_rejected[index]["value"] / stats_data.total_processed[index]["value"]
+          }
+          rej_percent.push(percent)
+        }
 
-  var ctx = document.getElementById('donutChart')
-  var donutChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: [
-        'Accepted',
-        'Rejected',
-        'Spoiled',
-        'Other'
-      ],
-      datasets: [{
-        data: [
-          80,
-          10,
-          5,
-          5
-        ],
-        backgroundColor: [
-          'red', 'blue', 'yellow', 'green'
-        ]
-      }]
-    },  options: Chart.defaults.doughnut
-  })
-})()
+        cured_percent = []
+        for (index in stats_data.total_cured) {
+          if (stats_data.total_rejected[index]["value"] == 0) {
+            continue;
+          }
+
+          percent = {
+            "name": stats_data.total_cured[index]["name"],
+            "value": 100 * stats_data.total_cured[index]["value"] / (stats_data.total_cured[index]["value"] + stats_data.total_rejected[index]["value"])
+          }
+          cured_percent.push(percent)
+        }
+
+        make_map("rejected", "countries/us/us-" + state + "-all", "Percentage Rejected by County", rej_percent)
+        make_map("cured", "countries/us/us-" + state + "-all", "Percentage Cured by County", cured_percent)
+        make_map("processed", "countries/us/us-" + state + "-all", "Processed by County", stats_data.total_processed)
+        
+      },
+      error: function (xhr, status, error) {
+        document.getElementById("loading").style.visibility='hidden';
+        
+      }
+    });
+
+  $.ajax({
+    type: "GET",
+    url: "http://128.220.221.36:5500/api/v1/stats/?state=" + state + "&election_dt=" + election_dt,
+    dataType: "json",
+    success: function (result, status, xhr) {
+      stats_data = result
+
+      quick_stats = [
+        ['Total processed', stats_data.total_processed],
+        ['Total rejected', stats_data.total_rejected],
+        ['Total cured', stats_data.total_cured],
+      ]
+
+      stats = [
+        ['Dummy', stats_data.total_cured],
+        ['Dummy', stats_data.total_cured],
+
+      ]
+      
+      quick_stats.forEach((stat) => {
+        const card = document.createElement('div')
+        card.setAttribute('class', 'quick_card')
+        quick_stats_container.appendChild(card)
+        create_stat(card, stat[0], stat[1])
+      })
+
+      stats.forEach((stat) => {
+        const card = document.createElement('div')
+        card.setAttribute('class', 'card')
+        container.appendChild(card)
+        create_stat(card, stat[0], stat[1])
+      })
+
+      // make a special pie chart for ballot issues
+      make_donut_chart(stats_data.ballot_issue_count, "ballot_issue", "ballot_issue_count", "Ballot Issues Breakdown", "ballot_issues")
+
+      // create pie charts
+      make_donut_chart(stats_data.rejected_age_group, "age", "age_count", "Rejections by Age")
+      make_donut_chart(stats_data.rejected_race, "race", "race_count", "Rejected by Race")
+      make_donut_chart(stats_data.cured_race, "race", "race_count", "Cured by Race")
+      make_donut_chart(stats_data.total_race, "race", "race_count", "Total Ballots by Race")
+      make_donut_chart(stats_data.rejected_gender, "gender", "gender_count", "Rejected by Gender")
+      make_donut_chart(stats_data.cured_gender, "gender", "gender_count", "Cured by Gender")
+      make_donut_chart(stats_data.total_gender, "gender", "gender_count", "Total Ballots by Gender")
+      
+      // create line charts
+      make_line_chart(stats_data.total_gender, "Rejected Ballots over time")
+      make_bar_chart(stats_data.total_race, stats_data.rejected_race, stats_data.cured_race)
+
+    },
+    error: function (xhr, status, error) {
+      console.log("Getting stats failed")
+    }
+  });
+}

@@ -10,9 +10,6 @@
   <title>Home</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
-
-
-
   <!-- Bootstrap core CSS -->
   <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -32,67 +29,12 @@
     }
   </style>
 
-
   <!-- Custom styles for this template -->
   <link href="dashboard.css" rel="stylesheet">
-
-</head>
-<body>
-
-  <div id="header-placeholder"></div>
-
-  <div class="container-fluid">
-    <div class="row">
-      <div id="nav-placeholder"></div>
-
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Cured Ballots Dashboard</h1>
-          <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group me-2">
-              <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
-            <div class="dropdown">
-              <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
-                <span data-feather="folder"></span>
-                Select State
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">GA Senate Runoff (1/5/21)</a>
-                <a class="dropdown-item" href="#">NC General (11/3/20)</a>
-              </div>
-            </div>
-            <div class="dropdown">
-              <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
-                <span data-feather="calendar"></span>
-                Select Election
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">GA Senate Runoff (1/5/21)</a>
-                <a class="dropdown-item" href="#">NC General (11/3/20)</a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div
-          class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <canvas class="my-4 w-50 h-50 chartjs-render-monitor" id="lineChart" height></canvas>
-          <canvas class="my-4 w-50 h-50 chartjs-render-monitor" id="donutChart"></canvas>
-        </div>
-
-        <div id="stats"></div>
-
-      </main>
-    </div>
-  </div>
+  <link href="stats.css" rel="stylesheet">
+  <link href="map.css" rel="stylesheet">
 
 
-  <script src="stats.js"></script>
-  
   <!-- JQuery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
   <script src="../assets/dist/js/scripts.js"></script>
@@ -104,7 +46,120 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
     integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
     crossorigin="anonymous"></script>
-  <script src="dashboard.js"></script>
+  <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+  <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/mapdata/countries/us/us-ga-all.js"></script>
+  <script src="https://code.highcharts.com/mapdata/countries/us/us-nc-all.js"></script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div id="nav-placeholder"></div>
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h1">Dashboard</h1>
+
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <select id="election-btn" onclick="pressButton()">
+              <option value="GA Senate Runoff (1/5/21)" selected="selected">GA Senate Runoff (1/5/21)</option>
+              <option value="NC General Election (11/3/20)">NC General Election (11/3/20)</option>
+            </select>
+
+          </div>
+
+        </div>
+        <div class="loader" id="loading"></div>
+        <div id="election-title">
+          <h2 class="h2" id="election">GA Senate Runoff (1/5/21)</h2>
+        </div>
+        
+        <h3 class="h3">Today's Snapshot</h3>
+        <!-- <div class="donutChartsContainer" id="barChart"></div>      -->
+
+        <ul class="nav nav-pills" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="Overview" aria-selected="true">Overview</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="charts-tab" data-bs-toggle="tab" data-bs-target="#charts" type="button" role="tab" aria-controls="charts" aria-selected="false">Charts</button>
+          </li>
+        </ul>
+  
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+          <!-- Quick Stats -->
+          <div id="quick_stats"></div>
+          
+          <h3 class="h3">Maps</h3>
+          <!-- Map and stats -->
+
+          <div class="map_stats_container"> 
+            <div class="map_side">
+              <ul class="nav nav-pills" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="processed-tab" data-bs-toggle="tab" data-bs-target="#processed" type="button" role="tab" aria-controls="Processed" aria-selected="true">Processed</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="rejected-tab" data-bs-toggle="tab" data-bs-target="#rejected" type="button" role="tab" aria-controls="Rejected" aria-selected="false">Rejected</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="cured-tab" data-bs-toggle="tab" data-bs-target="#cured" type="button" role="tab" aria-controls="Cured" aria-selected="false">Cured</button>
+                </li>
+              </ul>
+    
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="processed" role="tabpanel" aria-labelledby="processed-tab">
+                  <div class="map_container">
+                    <div id="processed" class="map"></div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="cured" role="tabpanel" aria-labelledby="cured-tab">
+                  <div class="map_container">
+                    <div id="cured" class="map"></div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">
+                  <div class="map_container">
+                    <div id="rejected" class="map"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Stats -->
+            <div class="stats_side">
+              <div id="stats"></div>
+              <div id="ballot_issues" class="ballot_issues"></div>
+            </div>
+
+          </div>
+
+          <!-- Line Chart -->
+          <h3 class="h3">Line Chart</h3>
+          <div class="donutChartsContainer" id="line"></div> 
+        </div>
+          
+        <!-- Charts tab -->
+        <div class="tab-pane fade" id="charts" role="tabpanel" aria-labelledby="charts-tab">
+          <h3 class="h3">Donut Chart</h3>
+          <div class="donutChartsContainer" id="donut"></div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+<script src="dashboard.js"></script>
+<script src="map.js"></script> 
+<script src="stats.js"></script>
+<script src="charts.js"></script> 
+<script src="main.js"></script>
+
 </body>
 
 </html>

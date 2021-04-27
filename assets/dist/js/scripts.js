@@ -10,13 +10,4 @@ $(document).ready(function() {
 
     $("#parameterDropdowns-placeholder").load("../components/parameterDropdowns");
 
-    $(".dropdown-item").on("click", function() {
-      console.log("Hi");
-      // var value = $(this).val().toLowerCase();
-      // console.log(value);
-      // $("#myTable tr").filter(function() {
-      //   $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      // });
-    });
-
 });
