@@ -27,12 +27,10 @@ function make_bar_chart(rejected, cured, label, name, title) {
     }
 
     percent_cured.push({
-      y: Number((cured_map[item] / (Number(cured_map[item]) + Number(rej_map[item]))).toFixed(2)),
+      y: Number((100 * cured_map[item] / (Number(cured_map[item]) + Number(rej_map[item]))).toFixed(2)),
       label: item
     })
   }
-
-  console.log(percent_cured)
 
   var chart = new CanvasJS.Chart(container, {
     theme: "light2",
