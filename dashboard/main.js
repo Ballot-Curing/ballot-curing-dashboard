@@ -7,7 +7,7 @@ elections = {
   },
   "GA Senate Runoff (1/5/21)" : {
     "state": "ga",
-    "election_dt": "01-05-2021"
+    "election_dt": "01-04-2021"
   }
 }
 
