@@ -4,7 +4,7 @@ function render_election_data(state, election_dt) {
   const app = document.getElementById('stats')
   const container = document.createElement('div')
   container.setAttribute('class', 'flex_container')
-  app.appendChild(container)
+  // app.appendChild(container)
 
   const quick_stats_app = document.getElementById('quick_stats')
   const quick_stats_container = document.createElement('div')
