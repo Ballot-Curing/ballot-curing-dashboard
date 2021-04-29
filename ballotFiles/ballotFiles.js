@@ -75,6 +75,7 @@ $(document).ready(function () {
 
   $("#table tbody").hide();
   $("#downloadBtn").hide();
+  $("#loading").hide();
 
   $('#dropdownMenuElection').empty();
   $('#dropdownMenuCounty').empty();
