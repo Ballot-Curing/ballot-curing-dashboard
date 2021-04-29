@@ -20,8 +20,9 @@ function pressButton() {
   // clear contents of old stuff
   $("#quick_stats").empty();
   $("#stats").empty();
-  $("#donut").empty();
-  $("#barChart").empty();
+  $("#race_group").empty();
+  $("#gender_group").empty();
+  $("#age_group").empty();
   $("#ballot_issues").empty();
   $("#line").empty();
   $("#last-processed").empty();

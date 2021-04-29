@@ -1,7 +1,7 @@
 // Contains helper functions to generate charts
 
-function make_bar_chart(rejected, cured, label, name, title) {
-  const app = document.getElementById('barChart')
+function make_bar_chart(rejected, cured, label, name, title, div) {
+  const app = document.getElementById(div)
   const container = document.createElement('div')
   container.setAttribute('class', 'chart_container')
   app.appendChild(container)

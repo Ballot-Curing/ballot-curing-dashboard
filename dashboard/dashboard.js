@@ -113,20 +113,21 @@ function render_election_data(state, election_dt) {
 
       // make a special pie chart for ballot issues
       make_donut_chart(stats_data.ballot_issue_count, "ballot_issue", "ballot_issue_count", "Ballot Issues Breakdown", "ballot_issues")
-
-      // create pie charts
-      make_donut_chart(stats_data.rejected_age_group, "age", "age_count", "Rejections by Age")
-      make_donut_chart(stats_data.total_race, "race", "race_count", "Total Ballots by Race")
-      make_donut_chart(stats_data.total_gender, "gender", "gender_count", "Total Ballots by Gender")
       
       // create line charts
       make_line_chart(stats_data.total_gender, "Rejected Ballots over time")
+      
+      // age section
+      make_bar_chart(stats_data.rejected_age_group, stats_data.cured_age_group, "age_count", "age", "% Cured Ballots By Age Group", "age_group")
+      make_donut_chart(stats_data.rejected_age_group, "age", "age_count", "Rejections by Age", "age_group")
 
-      // create bar charts
-      make_bar_chart(stats_data.rejected_race, stats_data.cured_race, "race_count", "race", "% Cured Ballots By Race")
-      make_bar_chart(stats_data.rejected_gender, stats_data.cured_gender, "gender_count", "gender", "% Cured Ballots By Gender")
-      make_bar_chart(stats_data.rejected_age_group, stats_data.cured_age_group, "age_count", "age", "% Cured Ballots By Age Group")
+      // race section
+      make_bar_chart(stats_data.rejected_race, stats_data.cured_race, "race_count", "race", "% Cured Ballots By Race", "race_group")
+      make_donut_chart(stats_data.total_race, "race", "race_count", "Total Ballots by Race", "race_group")
 
+      // gender section
+      make_bar_chart(stats_data.rejected_gender, stats_data.cured_gender, "gender_count", "gender", "% Cured Ballots By Gender", "gender_group")
+      make_donut_chart(stats_data.total_gender, "gender", "gender_count", "Total Ballots by Gender", "gender_group")
     },
     error: function (xhr, status, error) {
       console.log("Getting stats failed")
