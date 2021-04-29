@@ -1,10 +1,14 @@
 // Contains helper functions to generate charts
 
-function make_bar_chart(rejected, cured, label, name, title) {
-  const app = document.getElementById('barChart')
+function make_bar_chart(rejected, cured, label, name, title, div) {
+  const app = document.getElementById(div)
   const container = document.createElement('div')
   container.setAttribute('class', 'chart_container')
-  app.appendChild(container)
+  
+  if (rejected == null || rejected.length == 0 || rejected == "null") {
+    document.getElementById(div).textContent = "This election has no information for " + name
+    return;
+  }
 
   let rej_map = {}
   for (i = 0; i < rejected.length; i++) {
@@ -21,20 +25,20 @@ function make_bar_chart(rejected, cured, label, name, title) {
   
   percent_cured = []
   
-  for (race in cured_map) {
-    if (rej_map[race] == null || cured_map[race] == null) {
+  for (item in cured_map) {
+    if (rej_map[item] == null || cured_map[item] == null) {
       continue
     }
 
     percent_cured.push({
-      y: Number((cured_map[race] / (cured_map[race] + rej_map[race])).toFixed(2)),
-      label: race
+      y: Number((100 * cured_map[item] / (Number(cured_map[item]) + Number(rej_map[item]))).toFixed(2)),
+      label: item
     })
   }
 
-  console.log(percent_cured)
-
   var chart = new CanvasJS.Chart(container, {
+    theme: "light2",
+    animationDuration: 2000,
     animationEnabled: true,
     title:{
       text: title
@@ -56,6 +60,7 @@ function make_bar_chart(rejected, cured, label, name, title) {
     ]
   });
   chart.render();
+  app.appendChild(container)
 }
 
 
@@ -86,14 +91,12 @@ function toggleDataSeries(e) {
 
 
 
-function make_donut_chart(data, key, value, title, div="donut") {
+function make_donut_chart(data, key, value, title, div) {
   const app = document.getElementById(div)
   const container = document.createElement('div')
   container.setAttribute('class', 'chart_container')
-  app.appendChild(container)
 
   if (data == null || data.length == 0 || data == "null") { 
-    console.log("Null data for: " + key)
     return;
   }
   
@@ -104,6 +107,8 @@ function make_donut_chart(data, key, value, title, div="donut") {
 
   var donutChart = new CanvasJS.Chart(container,
   {
+    theme: "light2",
+    animationDuration: 2000,
     animationEnabled: true,
     title:{
       text: title
@@ -117,6 +122,7 @@ function make_donut_chart(data, key, value, title, div="donut") {
  });
 
   donutChart.render();
+  app.appendChild(container)
 }
 
 
@@ -128,6 +134,8 @@ function make_line_chart(data, title) {
 
   var chart = new CanvasJS.Chart(container,
     {
+      theme: "light2",
+      animationDuration: 2000,
       animationEnabled: true,
       title:{
       text: title

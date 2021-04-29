@@ -120,6 +120,7 @@ body {
 .chart_container {
   height: 350px; 
   width: 600px;
+  margin-bottom: 50px;
 }
 
 .loader {
@@ -139,4 +140,37 @@ body {
 
 .ballot_issues {
   margin: 30px;
+}
+
+.table-container {
+  width: 1000px;
+  /* background-color: #007bff; */
+  margin-bottom: 100px;
+}
+#table {
+  overflow-y: scroll;
+  height: 300px;
+  table-layout: fixed;
+  display: block;
+  
+}
+#table thead th {
+  position: sticky;
+  top: 0;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th,
+td {
+  width: 250px;
+  height: 40px;
+  border: 1px solid #ccc;
+}
+tr:hover {
+  background-color: lightsalmon;
+}
+th {
+  background: #eee;
 }
