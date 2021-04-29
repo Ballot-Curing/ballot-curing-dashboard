@@ -14,6 +14,7 @@ function render_election_data(state, election_dt) {
   
   document.getElementById("loading").style.visibility='visible';
 
+  // Get county data
   $.ajax({
       type: "GET",
       url: "http://128.220.221.36:5500/api/v1/stats/county_stats/?state=" + state + "&election_dt=" + election_dt,
@@ -47,9 +48,34 @@ function render_election_data(state, election_dt) {
           cured_percent.push(percent)
         }
 
-        make_map("rejected", "countries/us/us-" + state + "-all", "Percentage Rejected by County", rej_percent)
-        make_map("cured", "countries/us/us-" + state + "-all", "Percentage Cured by County", cured_percent)
-        make_map("processed", "countries/us/us-" + state + "-all", "Processed by County", stats_data.total_processed)
+        // County data
+        result = []
+        for (i in stats_data.total_cured) {
+          entry = {
+            "name": stats_data.total_cured[i]["name"],
+            "cured": stats_data.total_cured[i]["value"],
+            "rejected": stats_data.total_rejected[i]["value"],
+            "processed": stats_data.total_processed[i]["value"],
+          }
+          result.push(entry)
+
+        }
+        $("#table tbody").show();
+        $.each(result, function (i, item) {
+          if (i > 0) {
+            $("#table tbody").append(
+              "<tr>"
+              + "<td>" + item.name + "</td>"
+              + "<td>" + item.cured + "</td>"
+              + "<td>" + item.rejected + "</td>"
+              + "<td>" + item.processed + "</td>"
+              + "</tr>")
+          }
+        })
+
+        make_map("rejected", "countries/us/us-" + state + "-all", "% Ballots Processed that are Rejected by County", rej_percent)
+        make_map("cured", "countries/us/us-" + state + "-all", "% Ballots Rejected that are Cured by County", cured_percent)
+        make_map("processed", "countries/us/us-" + state + "-all", "Total Processed by County", stats_data.total_processed)
         
       },
       error: function (xhr, status, error) {
@@ -76,7 +102,7 @@ function render_election_data(state, election_dt) {
       }
     });
 
-    
+  // Get state data
   $.ajax({
     type: "GET",
     url: "http://128.220.221.36:5500/api/v1/stats/?state=" + state + "&election_dt=" + election_dt,

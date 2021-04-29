@@ -12,7 +12,7 @@
   <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
   <!-- Bootstrap core CSS -->
   <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -97,9 +97,10 @@
           <div id="quick_stats"></div>
           
           <h3 class="h3">Maps</h3>
-          <!-- Map and stats -->
 
+          <!-- Map and stats -->
           <div class="map_stats_container"> 
+            <!-- Map side -->
             <div class="map_side">
               <ul class="nav nav-pills" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -131,12 +132,11 @@
                 </div>
               </div>
             </div>
-            <!-- Stats -->
+            <!-- Stats side -->
             <div class="stats_side">
               <div id="stats"></div>
               <div id="ballot_issues" class="ballot_issues"></div>
             </div>
-
           </div>
 
           <!-- Line Chart -->
@@ -152,6 +152,24 @@
           <div class="donutChartsContainer" id="gender_group"></div>     
           <h3 class="h3">Age Group</h3>
           <div class="donutChartsContainer" id="age_group"></div>     
+        </div>
+
+        <!-- Table -->
+        <h3 class="h3">Table</h3>
+
+        <div class="table-container">
+          <table id="table" data-toggle="table" data-height="460" data-side-pagination="server" data-pagination="true"
+          data-filter-control="true" data-show-search-clear-button="true">
+            <thead>
+                <tr class="content">
+                    <th data-field="county">County</th>
+                    <th data-field="cured">Cured</th>
+                    <th data-field="rejected">Rejected</th>
+                    <th data-field="processed">Processed</th>
+                    <tbody></tbody>
+                </tr>
+            </thead>
+          </table>
         </div>
 
       </main>
