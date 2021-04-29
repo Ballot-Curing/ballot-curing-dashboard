@@ -4,7 +4,11 @@ function make_bar_chart(rejected, cured, label, name, title, div) {
   const app = document.getElementById(div)
   const container = document.createElement('div')
   container.setAttribute('class', 'chart_container')
-  app.appendChild(container)
+  
+  if (rejected == null || rejected.length == 0 || rejected == "null") {
+    document.getElementById(div).textContent = "This election has no information for " + name
+    return;
+  }
 
   let rej_map = {}
   for (i = 0; i < rejected.length; i++) {
@@ -56,6 +60,7 @@ function make_bar_chart(rejected, cured, label, name, title, div) {
     ]
   });
   chart.render();
+  app.appendChild(container)
 }
 
 
@@ -86,14 +91,12 @@ function toggleDataSeries(e) {
 
 
 
-function make_donut_chart(data, key, value, title, div="donut") {
+function make_donut_chart(data, key, value, title, div) {
   const app = document.getElementById(div)
   const container = document.createElement('div')
   container.setAttribute('class', 'chart_container')
-  app.appendChild(container)
 
   if (data == null || data.length == 0 || data == "null") { 
-    console.log("Null data for: " + key)
     return;
   }
   
@@ -119,6 +122,7 @@ function make_donut_chart(data, key, value, title, div="donut") {
  });
 
   donutChart.render();
+  app.appendChild(container)
 }
 
 

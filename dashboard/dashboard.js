@@ -119,15 +119,15 @@ function render_election_data(state, election_dt) {
       
       // age section
       make_bar_chart(stats_data.rejected_age_group, stats_data.cured_age_group, "age_count", "age", "% Cured Ballots By Age Group", "age_group")
-      make_donut_chart(stats_data.rejected_age_group, "age", "age_count", "Rejections by Age", "age_group")
+      make_donut_chart(stats_data.rejected_age_group, "age", "age_count", "Rejected Ballots by Age", "age_group")
 
       // race section
       make_bar_chart(stats_data.rejected_race, stats_data.cured_race, "race_count", "race", "% Cured Ballots By Race", "race_group")
-      make_donut_chart(stats_data.total_race, "race", "race_count", "Total Ballots by Race", "race_group")
+      make_donut_chart(stats_data.rejected_race, "race", "race_count", "Rejected Ballots by Race", "race_group")
 
       // gender section
       make_bar_chart(stats_data.rejected_gender, stats_data.cured_gender, "gender_count", "gender", "% Cured Ballots By Gender", "gender_group")
-      make_donut_chart(stats_data.total_gender, "gender", "gender_count", "Total Ballots by Gender", "gender_group")
+      make_donut_chart(stats_data.rejected_gender, "gender", "gender_count", "Rejected Ballots by Gender", "gender_group")
     },
     error: function (xhr, status, error) {
       console.log("Getting stats failed")
