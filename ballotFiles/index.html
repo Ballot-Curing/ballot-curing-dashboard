@@ -11,6 +11,8 @@
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../dashboard/dashboard.css" rel="stylesheet">
+    <link href="../ballotFiles/ballotFiles.css" rel="stylesheet">
+
 
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
 
@@ -24,9 +26,9 @@
     <main class="px-md-4 pt-md-3">
         <h1 class="profile-name">Download Absentee Ballot File</h1>
         <p>
-            <em>Follow the 3 steps below to view (and download) absentee ballot statuses of voters in the
-                selected
-                election</em>
+            Follow the 3 steps below to view (and download) absentee ballot statuses of voters in the
+            selected
+            election
             <br>
             <em class="small">*Note: Downloaded files include additional attributes that are absent from the
                 displayed
@@ -70,32 +72,31 @@
         </div>
 
 
-    <div class="d-flex flex-row">
-        <div class="mr-auto p-2" id="parInstructions" style="order: 1">
-            <p>3)</p>
+        <div class="d-flex flex-row">
+            <div class="mr-auto p-2" id="parInstructions" style="order: 1">
+                <p>3)</p>
+            </div>
+            <br>
+            <!-- <div style="order: 2"> -->
+            <div class="btn-group-toggle mr-auto" style="order: 2">
+                <label id="label" class="btn btn-light active">
+                    (Optional) Select Additional Parameters Below
+                </label>
+            </div>
         </div>
-        <br>
-        <div class="btn-group-toggle mr-auto" style="order: 2">
-            <label class="btn btn-secondary active">
-                 Select Additional Parameters Below
-            </label>
-        </div>
-        <div style="order: 3">
-            <em>*Optional</em>
-        </div>
-    </div>
 
-    <div class="btn-group mr-10">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownCounty"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                County
-            </button>
-            <!-- TODO: add checkbox-menu to class to handle multiple inputs -->
-            <div class="dropdown-menu scrollable-menu" style="overflow-y:auto; max-height:50vh" id="dropdownMenuCounty" aria-labelledby="dropdownMenuButton">
-                <input type="text" placeholder="Search.." id="countyInput" onkeyup="filterCounty()">
-                <li><a class="dropdown-item" data-value="1" href="#">Fulton</a></li>
-                <li><a class="dropdown-item" data-value="2" href="#">Gwinnett</a></li>
+        <div class="btn-group mr-10">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" value=0 id="dropdownCounty"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    County
+                </button>
+                <!-- TODO: add checkbox-menu to class to handle multiple inputs -->
+                <div class="dropdown-menu scrollable-menu" style="overflow-y:auto; max-height:50vh"
+                    id="dropdownMenuCounty" aria-labelledby="dropdownMenuButton">
+                    <input type="text" placeholder="Search.." id="countyInput" onkeyup="filterCounty()">
+                    <li><a class="dropdown-item" data-value="1" href="#">Fulton</a></li>
+                    <li><a class="dropdown-item" data-value="2" href="#">Gwinnett</a></li>
                 </div>
             </div>
             <div class="dropdown">
@@ -140,7 +141,7 @@
             <button type="button" class="btn btn-info" id="clearBtn">Clear Filters</button>
         </div>
         <div class="btn-group float-end">
-            <button type="button" class="btn btn-warning" id="downloadBtn">Download</button>
+            <button type="button" class="btn btn-warning" id="downloadBtn">Download File</button>
         </div>
 
         <table id="table" data-toggle="table" data-height="460" data-side-pagination="server" data-pagination="true"
