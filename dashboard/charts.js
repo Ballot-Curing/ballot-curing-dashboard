@@ -1,10 +1,9 @@
 // Contains helper functions to generate charts
 
-function make_bar_chart(rejected, cured, label, name, title, div) {
+function make_bar_chart(rejected, cured, label, name, title, div, subtitle) {
   const app = document.getElementById(div)
   const container = document.createElement('div')
   container.setAttribute('class', 'chart_container')
-  
   if (rejected == null || rejected.length == 0 || rejected == "null") {
     document.getElementById(div).textContent = "This election has no information for " + name
     return;
@@ -43,6 +42,9 @@ function make_bar_chart(rejected, cured, label, name, title, div) {
     title:{
       text: title
     },
+    subtitles: [{
+      text: subtitle
+    }],
     axisY: {
       title: "Ballots",
       includeZero: true

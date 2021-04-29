@@ -10,7 +10,7 @@
 
 .map_side {
   /* background-color: green; */
-  min-width: 600px;
+  min-width: 50%;
   margin-right: 20px;
 }
 
@@ -21,7 +21,7 @@
 
 .map {
   height: 600px; 
-  width: 600px; 
+  /* width: 50%;  */
 }
 
 .card {
