@@ -63,7 +63,13 @@ function dropdownToggle() {
 
 }
 
-
+$(document).ajaxStart(function(){
+  $("#loading").show();
+  // $("#downloadBtn").hide();
+}).ajaxStop(function() {
+  $("#loading").hide();
+  // $("#downloadBtn").show();
+});
 
 $(document).ready(function () {
 
