@@ -144,32 +144,32 @@ function render_election_data(state, election_dt) {
       make_line_chart(stats_data.total_gender, "Rejected Ballots over time")
       
       // age section
-      make_bar_chart(stats_data.rejected_age_group, stats_data.cured_age_group, "age_count", "age", "% Cured Ballots By Age Group", "age_group", "Cured/(Cured+Rejected)")
-      make_donut_chart(stats_data.cured_age_group, "age", "age_count", "Cured Ballots by Age", "age_group")
-      
-      make_bar_chart(stats_data.total_age_group, stats_data.rejected_age_group, "age_count", "age", "% Rejected Ballots By Age Group", "age_group", "Rejected/(Total processed)")
-      make_donut_chart(stats_data.rejected_age_group, "age", "age_count", "Rejected Ballots by Age", "age_group")
-
       make_donut_chart(stats_data.total_age_group, "age", "age_count", "Total Ballots by Age", "age_group")
+      make_donut_chart(stats_data.rejected_age_group, "age", "age_count", "Rejected Ballots by Age", "age_group")
+      make_donut_chart(stats_data.cured_age_group, "age", "age_count", "Cured Ballots by Age", "age_group")
+
+      make_bar_chart(stats_data.total_age_group, stats_data.rejected_age_group, "age_count", "age", "% Rejected Ballots By Age Group", "age_group", "Rejected/(Total processed)")
+      make_bar_chart(stats_data.rejected_age_group, stats_data.cured_age_group, "age_count", "age", "% Cured Ballots By Age Group", "age_group", "Cured/(Cured+Rejected)")
+
 
       // race section
-      make_bar_chart(stats_data.rejected_race, stats_data.cured_race, "race_count", "race", "% Cured Ballots By Race", "race_group", "Cured/(Cured+Rejected)")
+      make_donut_chart(stats_data.total_race, "race", "race_count", "Total Ballots by Race", "race_group")
+      make_donut_chart(stats_data.rejected_race, "race", "race_count", "Rejected Ballots by Race", "race_group")
       make_donut_chart(stats_data.cured_race, "race", "race_count", "Cured Ballots by Race", "race_group")
       
+      make_bar_chart(stats_data.total_race, stats_data.total_race, "race_count", "race", "% Total Ballots By Race", "race_group", "Rejected/(Total processed)")
       make_bar_chart(stats_data.total_race, stats_data.rejected_race, "race_count", "race", "% Rejected Ballots By Race", "race_group", "Rejected/(Total processed)")
-      make_donut_chart(stats_data.rejected_race, "race", "race_count", "Rejected Ballots by Race", "race_group")
+      make_bar_chart(stats_data.rejected_race, stats_data.cured_race, "race_count", "race", "% Cured Ballots By Race", "race_group", "Cured/(Cured+Rejected)")
 
-      make_donut_chart(stats_data.total_race, "race", "race_count", "Total Ballots by Race", "race_group")
 
       // gender section
-      make_bar_chart(stats_data.rejected_gender, stats_data.cured_gender, "gender_count", "gender", "% Cured Ballots By Gender", "gender_group", "Cured/(Cured+Rejected)")
-      make_donut_chart(stats_data.cured_gender, "gender", "gender_count", "Cured Ballots by Gender", "gender_group")
-      
-      make_bar_chart(stats_data.total_gender, stats_data.rejected_gender, "gender_count", "gender", "% Rejected Ballots By Gender", "gender_group", "Rejected/(Total processed)")
-      make_donut_chart(stats_data.rejected_gender, "gender", "gender_count", "Rejected Ballots by Gender", "gender_group")
-      
-      
       make_donut_chart(stats_data.total_gender, "gender", "gender_count", "Total Ballots by Gender", "gender_group")
+      make_donut_chart(stats_data.rejected_gender, "gender", "gender_count", "Rejected Ballots by Gender", "gender_group")
+      make_donut_chart(stats_data.cured_gender, "gender", "gender_count", "Cured Ballots by Gender", "gender_group")
+
+      make_bar_chart(stats_data.total_gender, stats_data.rejected_gender, "gender_count", "gender", "% Rejected Ballots By Gender", "gender_group", "Rejected/(Total processed)")
+      make_bar_chart(stats_data.rejected_gender, stats_data.cured_gender, "gender_count", "gender", "% Cured Ballots By Gender", "gender_group", "Cured/(Cured+Rejected)")
+
     },
     error: function (xhr, status, error) {
       console.log("Getting stats failed")
