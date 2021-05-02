@@ -1,9 +1,86 @@
+<!DOCTYPE html>
 <html>
-   <head>
-      <title>HTML Meta Tag</title>
-      <meta http-equiv = "refresh" content = "0; url = home/index.html" />
-   </head>
-   <body>
-      <p>Redirecting to another URL</p>
-   </body>
+
+<head>
+    <title>Ballot Curing Project | Home</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sticky-footer/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="./dashboard/dashboard.css" rel="stylesheet">
+    <link href="./css/home.css" rel="stylesheet">
+    <link href="./assets/dist/css/my.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-image: url('./assets/home/GettyImages-1206477683-1000x667.jpeg');
+            background-size: cover;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="header-placeholder"></div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div id="nav-placeholder"></div>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pb-md-4">
+                <div class="d-flex flex-column">
+                    <h1 class="h1 pt-3 border-bottom">Welcome to the U.S. Ballot Curing Project</h1>
+
+                    <div class="p-2">
+                        <p><em>A platform for resources related to ballot curing - bringing efficiency and transparency to our democracy</em></p>
+                    </div>
+                </div>
+                <div id="flex1" class="d-flex flex-row justify-content:space-between">
+                    <div class="flex-items boxed">
+                        Download a list of voters whose ballots have been rejected in a selected election. Lists can be filtered by parameters such as location, voter demographics, and ballot issue. The data is sourced from the selected state's Secretary of State Office.
+                        <a class="horizontal-center" href="./ballotFiles/index.html">
+                            <button id="but" class="btn btn-secondary" type="button">
+                                Download Ballot Files
+                            </button>
+                        </a>
+                    </div>
+                    <div class="flex-items boxed">
+                        View ballot status analytics for a given election. Charts and figures illustrate statistics on rejected and cured ballots, broken down by location and demographics.
+                        <a class="horizontal-center" href="./dashboard/index.html">
+                            <button id="but" class="btn btn-secondary" type="button">
+                                View Dashboard
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <div id="flex2" class="d-flex flex-row justify-content:space-between">
+                    <div class="flex-items boxed">
+                        Click here to learn more about ballot curing, why addressing inefficiency in this process is so important, and the developers working on this project.
+                        <a class="horizontal-center" href="./about/index.html">
+                            <button id="but2" class="btn btn-secondary" type="button">
+                                Learn More
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+
+
+    </div>
+    <div id="footer-placeholder"></div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+        integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+        crossorigin="anonymous"></script>
+
+    <script src="./assets/dist/js/scripts.js"></script>
+</body>
+
+
 </html>
