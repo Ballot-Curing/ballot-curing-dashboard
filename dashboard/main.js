@@ -13,7 +13,7 @@ elections = {
 
 // Default
 $(document).ready(function () {
-  render_election_data("ga", "01-04-2021");
+  render_election_data(elections["GA Senate Runoff (1/5/21)"]["state"], elections["GA Senate Runoff (1/5/21)"]["election_dt"]);
 });
 
 function pressButton() {
