@@ -115,7 +115,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   height: 50%;
-  background-color: rgba(0, 44, 165, 0.1);
+  /* background-color: rgba(0, 44, 165, 0.1); */
 }
 
 .chart_container {

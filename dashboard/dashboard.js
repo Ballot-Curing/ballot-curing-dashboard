@@ -139,18 +139,14 @@ function render_election_data(state, election_dt) {
       })
 
       // make a special pie chart for ballot issues
-      make_donut_chart(stats_data.ballot_issue_count, "ballot_issue", "ballot_issue_count", "Ballot Issues Breakdown", "ballot_issues")
-      
-      // create line charts
-      make_line_chart(stats_data.total_gender, "Rejected Ballots over time")
-      
+      make_donut_chart(stats_data.ballot_issue_count, "ballot_issue", "ballot_issue_count", "Ballot Issues Breakdown", "ballot_issues")      
 
       // race section
       make_donut_chart(stats_data.total_race, "race", "race_count", "Total Ballots by Race", "race_group")
       make_donut_chart(stats_data.rejected_race, "race", "race_count", "Rejected Ballots by Race", "race_group")
       make_donut_chart(stats_data.cured_race, "race", "race_count", "Cured Ballots by Race", "race_group")
       
-      // make_total_bar_chart(stats_data.total_race,  "race_count", "race", "Percent Total Ballots by Race", "race_group", "")
+      make_total_bar_chart(stats_data.total_race,  "race_count", "race", "Percent Total Ballots by Race", "race_group", "")
       make_bar_chart(stats_data.total_race, stats_data.rejected_race, "race_count", "race", "Percent Rejected Ballots By Race", "race_group", "Rejected/(Total processed)")
       make_bar_chart(stats_data.rejected_race, stats_data.cured_race, "race_count", "race", "Percent Cured Ballots By Race", "race_group", "Cured/(Cured+Rejected)")
       
@@ -169,7 +165,7 @@ function render_election_data(state, election_dt) {
       make_donut_chart(stats_data.rejected_gender, "gender", "gender_count", "Rejected Ballots by Gender", "gender_group")
       make_donut_chart(stats_data.cured_gender, "gender", "gender_count", "Cured Ballots by Gender", "gender_group")
 
-      // make_total_bar_chart(stats_data.total_gender,  "gender_count", "gender", "Percent Total Ballots by Gender", "gender_group", "")
+      make_total_bar_chart(stats_data.total_gender,  "gender_count", "gender", "Percent Total Ballots by Gender", "gender_group", "")
       make_bar_chart(stats_data.total_gender, stats_data.rejected_gender, "gender_count", "gender", "Percent Rejected Ballots By Gender", "gender_group", "Rejected/(Total processed)")
       make_bar_chart(stats_data.rejected_gender, stats_data.cured_gender, "gender_count", "gender", "Percent Cured Ballots By Gender", "gender_group", "Cured/(Cured+Rejected)")
 
