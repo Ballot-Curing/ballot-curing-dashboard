@@ -114,16 +114,21 @@ body {
 .donutChartsContainer {
   display: flex;
   flex-wrap: wrap;
-  width: 70%;
   height: 50%;
   background-color: rgba(0, 44, 165, 0.1);
 }
 
 .chart_container {
   height: 350px; 
-  width: 30%;
+  width: 33%;
   margin-bottom: 50px;
-  margin-right: 10px;
+}
+
+.line_chart_container {
+  height: 350px; 
+  width: 40%;
+  margin-right: 10%;
+  /* margin-bottom: 50px; */
 }
 
 .loader {
