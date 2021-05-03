@@ -4,7 +4,7 @@ function make_total_bar_chart(data, label, name, title, div, subtitle) {
   const app = document.getElementById(div)
   const container = document.createElement('div')
   container.setAttribute('class', 'chart_container')
-  console.log(data)
+  // console.log(data)
 
   total = 0
   for (i = 0; i < data.length; i++) {
@@ -13,7 +13,7 @@ function make_total_bar_chart(data, label, name, title, div, subtitle) {
 
   percents = []
   for (item in data) {
-    if (data[item] == NaN) {
+    if (data[item] == NaN || data[item][name] == "") {
       continue
     }
 
@@ -33,7 +33,7 @@ function make_total_bar_chart(data, label, name, title, div, subtitle) {
     return 0;
   })
 
-  console.log(percents)
+  // console.log(percents)
 
   var chart = new CanvasJS.Chart(container, {
     theme: "light2",
@@ -267,8 +267,3 @@ function make_line_chart(data, title) {
   }
   
 }
-
-
-
-
-

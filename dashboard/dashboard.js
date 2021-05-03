@@ -1,6 +1,8 @@
 // Contains helper file for generating dashboard data
 
 function render_election_data(state, election_dt) {
+
+  // Generate stats cards
   const app = document.getElementById('stats')
   const container = document.createElement('div')
   container.setAttribute('class', 'flex_container')
@@ -187,6 +189,11 @@ function render_election_data(state, election_dt) {
       make_line_chart(result.cured_totals, "Total number of cured ballots")
     },
     error: function (xhr, status, error) {
+      // temp
+      make_line_chart(1, "New Rejected Ballots per day")
+      make_line_chart(1, "Total number of rejected ballots")
+      make_line_chart(1, "New cured ballots per day")
+      make_line_chart(1, "Total number of cured ballots")
     }
   });
 
