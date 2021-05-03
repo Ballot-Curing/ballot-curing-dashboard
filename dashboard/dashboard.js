@@ -139,7 +139,7 @@ function render_election_data(state, election_dt) {
       })
 
       // make a special pie chart for ballot issues
-      make_donut_chart(stats_data.ballot_issue_count, "ballot_issue", "ballot_issue_count", "Ballot Issues Breakdown", "ballot_issues")      
+      make_donut_chart(stats_data.ballot_issue_count, "ballot_issue", "ballot_issue_count", "Ballot Issues Breakdown", "ballot_issues", "")      
 
       // race section
       make_donut_chart(stats_data.total_race, "race", "race_count", "Total Ballots by Race", "race_group")
