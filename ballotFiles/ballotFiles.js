@@ -251,7 +251,7 @@ $(document).ready(function () {
       console.log("DOWNLOAD");
       $.ajax({
         type: 'GET',
-        url: 'http://128.220.221.36:3999/api/v1/download/',
+        url: 'http://128.220.221.36:5500/api/v1/download/',
         //dataType: 'json',
         data: { state: state_val, election_dt: election_val, county: county_val, city: city_val, ballot_rtn_status: status_val, ballot_issue: issue_val },
         xhrFields: {
