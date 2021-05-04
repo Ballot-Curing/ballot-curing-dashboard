@@ -221,8 +221,11 @@ function make_line_chart(data, title) {
 
   try {
     for (i in data) {
+      let date = new Date(data[i].proc_date.substring(5))
+      date.setDate(date.getDate() + 1)
+      
       dataPoint = {
-        x: new Date(data[i].proc_date.substring(5)),
+        x: date,
         y: data[i].value
       }
       dataPoints.push(dataPoint)
