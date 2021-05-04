@@ -62,18 +62,18 @@ function render_election_data(state, election_dt) {
           result.push(entry)
 
         }
-        $("#table tbody").show();
-        $.each(result, function (i, item) {
-          if (i > 0) {
-            $("#table tbody").append(
-              "<tr>"
-              + "<td>" + item.name + "</td>"
-              + "<td>" + item.cured + "</td>"
-              + "<td>" + item.rejected + "</td>"
-              + "<td>" + item.processed + "</td>"
-              + "</tr>")
-          }
-        })
+        // $("#table tbody").show();
+        // $.each(result, function (i, item) {
+        //   if (i > 0) {
+        //     $("#table tbody").append(
+        //       "<tr>"
+        //       + "<td>" + item.name + "</td>"
+        //       + "<td>" + item.cured + "</td>"
+        //       + "<td>" + item.rejected + "</td>"
+        //       + "<td>" + item.processed + "</td>"
+        //       + "</tr>")
+        //   }
+        // })
 
         make_map("rejected", "countries/us/us-" + state + "-all", "% Ballots Rejected by County", rej_percent)
         make_map("cured", "countries/us/us-" + state + "-all", "% Ballots Cured by County", cured_percent)
