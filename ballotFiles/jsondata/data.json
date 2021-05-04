@@ -2,9 +2,9 @@
     "GA": [
         {
             "elections": {
-                "dates": "01-04-2021",
+                "dates": "01-05-2021",
                 "01-04-2021": {
-                    "date": "01-04-2021",
+                    "date": "01-05-2021",
                     "status": "R",
                     "issues": "Ballot Received after Deadline,Ineligible Elector,Invalid Signature,MIDR - ID not Provided,Missing Signature"
                 }
