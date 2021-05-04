@@ -5,18 +5,18 @@
 
 .map_stats_container {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 
 .map_side {
   /* background-color: green; */
-  min-width: 50%;
+  min-width: 40%;
   margin-right: 20px;
 }
 
 .stats_side {
   /* background-color: red; */
-  min-width: 100px;
+  width: 45%;
 }
 
 .map {
