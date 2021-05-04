@@ -5,12 +5,12 @@
                 "dates": "01-04-2021,11-03-2020",
                 "01-04-2021": {
                     "date": "01-04-2021",
-                    "status": "A,R",
+                    "status": "R",
                     "issues": "Ballot Received after Deadline,Ineligible Elector,Invalid Signature,MIDR - ID not Provided,Missing Signature"
                 },
                 "11-03-2020": {
                     "date": "11-03-2020",
-                    "status": "A,R",
+                    "status": "R",
                     "issues": "Ballot Received after Deadline,Ineligible Elector ,Invalid Signature,MIDR - ID not Provided,Missing Signature"
                 }
             },
@@ -24,7 +24,7 @@
                 "dates": "11-03-2020",
                 "11-03-2020": {
                     "date": "11-03-2020",
-                    "status": "A,R",
+                    "status": "R",
                     "issues":  "Assistant Info Incomplete,Conflict,Duplicate,E-Transmission Failure,No Time For Cure - Contacted,Not Properly Notarized,Returned After Deadline,Returned Undeliverable,Signature Different,Witness Info Incomplete,Wrong Voter"
                 }
             },

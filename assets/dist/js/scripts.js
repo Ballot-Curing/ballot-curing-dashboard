@@ -8,6 +8,7 @@ $(document).ready(function() {
     $("#footer-placeholder").load("../components/footer.html");
 
 
+
     $("#parameterDropdowns-placeholder").load("../components/parameterDropdowns");
 
 });
