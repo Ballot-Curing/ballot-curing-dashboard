@@ -186,7 +186,7 @@ function render_election_data(state, election_dt) {
       make_line_chart(result.rejected_unique, "New Rejected Ballots Per Day")
       make_line_chart(result.rejected_totals, "Cumulative Rejected Ballots")
       make_line_chart(result.cured_unique, "New Cured Ballots Per Day")
-      make_line_chart(result.cured_totals, "Cumulative Cured Callots")
+      make_line_chart(result.cured_totals, "Cumulative Cured Ballots")
     },
     error: function (xhr, status, error) {
 
