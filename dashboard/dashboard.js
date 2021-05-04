@@ -180,7 +180,7 @@ function render_election_data(state, election_dt) {
   // Get time series data
   $.ajax({
     type: "GET",
-    url: "http://128.220.221.36:3999/api/v1/stats/time_series/?state=GA&election_dt=01-05-2021",
+    url: "http://128.220.221.36:3999/api/v1/stats/time_series/?state=" + state + "&election_dt=" + election_dt,
     dataType: "json",
     success: function (result, status, xhr) {
       make_line_chart(result.rejected_unique, "New Rejected Ballots per day")
