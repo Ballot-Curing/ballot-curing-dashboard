@@ -1,6 +1,8 @@
 // Contains helper file for generating dashboard data
 
 function render_election_data(state, election_dt) {
+
+  // Generate stats cards
   const app = document.getElementById('stats')
   const container = document.createElement('div')
   container.setAttribute('class', 'flex_container')
@@ -83,7 +85,8 @@ function render_election_data(state, election_dt) {
         
       }
     });
-
+    
+    // Get last updated data
     $.ajax({
       type: "GET",
       url: "http://128.220.221.36:5500/api/v1/lastProcessed/?state=" + state + "&election_dt=" + election_dt,
@@ -138,41 +141,60 @@ function render_election_data(state, election_dt) {
       })
 
       // make a special pie chart for ballot issues
-      make_donut_chart(stats_data.ballot_issue_count, "ballot_issue", "ballot_issue_count", "Ballot Issues Breakdown", "ballot_issues")
-      
-      // create line charts
-      make_line_chart(stats_data.total_gender, "Rejected Ballots over time")
-      
-      // age section
-      make_bar_chart(stats_data.rejected_age_group, stats_data.cured_age_group, "age_count", "age", "% Cured Ballots By Age Group", "age_group", "Cured/(Cured+Rejected)")
-      make_donut_chart(stats_data.cured_age_group, "age", "age_count", "Cured Ballots by Age", "age_group")
-      
-      make_bar_chart(stats_data.total_age_group, stats_data.rejected_age_group, "age_count", "age", "% Rejected Ballots By Age Group", "age_group", "Rejected/(Total processed)")
-      make_donut_chart(stats_data.rejected_age_group, "age", "age_count", "Rejected Ballots by Age", "age_group")
-
-      make_donut_chart(stats_data.total_age_group, "age", "age_count", "Total Ballots by Age", "age_group")
+      make_donut_chart(stats_data.ballot_issue_count, "ballot_issue", "ballot_issue_count", "Ballot Issues Breakdown", "ballot_issues", "")      
 
       // race section
-      make_bar_chart(stats_data.rejected_race, stats_data.cured_race, "race_count", "race", "% Cured Ballots By Race", "race_group", "Cured/(Cured+Rejected)")
+      make_donut_chart(stats_data.total_race, "race", "race_count", "Total Ballots by Race", "race_group")
+      make_donut_chart(stats_data.rejected_race, "race", "race_count", "Rejected Ballots by Race", "race_group")
       make_donut_chart(stats_data.cured_race, "race", "race_count", "Cured Ballots by Race", "race_group")
       
-      make_bar_chart(stats_data.total_race, stats_data.rejected_race, "race_count", "race", "% Rejected Ballots By Race", "race_group", "Rejected/(Total processed)")
-      make_donut_chart(stats_data.rejected_race, "race", "race_count", "Rejected Ballots by Race", "race_group")
+      make_total_bar_chart(stats_data.total_race,  "race_count", "race", "Percent Total Ballots by Race", "race_group", "")
+      make_bar_chart(stats_data.total_race, stats_data.rejected_race, "race_count", "race", "Percent Rejected Ballots By Race", "race_group", "Rejected/(Total processed)")
+      make_bar_chart(stats_data.rejected_race, stats_data.cured_race, "race_count", "race", "Percent Cured Ballots By Race", "race_group", "Cured/(Cured+Rejected)")
+      
+      // age section
+      make_donut_chart(stats_data.total_age_group, "age", "age_count", "Total Ballots by Age", "age_group")
+      make_donut_chart(stats_data.rejected_age_group, "age", "age_count", "Rejected Ballots by Age", "age_group")
+      make_donut_chart(stats_data.cured_age_group, "age", "age_count", "Cured Ballots by Age", "age_group")
 
-      make_donut_chart(stats_data.total_race, "race", "race_count", "Total Ballots by Race", "race_group")
+      make_total_bar_chart(stats_data.total_age_group,  "age_count", "age", "Percent Total Ballots by Age", "age_group", "")
+      make_bar_chart(stats_data.total_age_group, stats_data.rejected_age_group, "age_count", "age", "Percent Rejected Ballots By Age Group", "age_group", "Rejected/(Total processed)")
+      make_bar_chart(stats_data.rejected_age_group, stats_data.cured_age_group, "age_count", "age", "Percent Cured Ballots By Age Group", "age_group", "Cured/(Cured+Rejected)")
+
 
       // gender section
-      make_bar_chart(stats_data.rejected_gender, stats_data.cured_gender, "gender_count", "gender", "% Cured Ballots By Gender", "gender_group", "Cured/(Cured+Rejected)")
-      make_donut_chart(stats_data.cured_gender, "gender", "gender_count", "Cured Ballots by Gender", "gender_group")
-      
-      make_bar_chart(stats_data.total_gender, stats_data.rejected_gender, "gender_count", "gender", "% Rejected Ballots By Gender", "gender_group", "Rejected/(Total processed)")
-      make_donut_chart(stats_data.rejected_gender, "gender", "gender_count", "Rejected Ballots by Gender", "gender_group")
-      
-      
       make_donut_chart(stats_data.total_gender, "gender", "gender_count", "Total Ballots by Gender", "gender_group")
+      make_donut_chart(stats_data.rejected_gender, "gender", "gender_count", "Rejected Ballots by Gender", "gender_group")
+      make_donut_chart(stats_data.cured_gender, "gender", "gender_count", "Cured Ballots by Gender", "gender_group")
+
+      make_total_bar_chart(stats_data.total_gender,  "gender_count", "gender", "Percent Total Ballots by Gender", "gender_group", "")
+      make_bar_chart(stats_data.total_gender, stats_data.rejected_gender, "gender_count", "gender", "Percent Rejected Ballots By Gender", "gender_group", "Rejected/(Total processed)")
+      make_bar_chart(stats_data.rejected_gender, stats_data.cured_gender, "gender_count", "gender", "Percent Cured Ballots By Gender", "gender_group", "Cured/(Cured+Rejected)")
+
     },
     error: function (xhr, status, error) {
       console.log("Getting stats failed")
     }
   });
+
+  // Get time series data
+  $.ajax({
+    type: "GET",
+    url: "http://128.220.221.36:3999/api/v1/stats/time_series/?state=GA&election_dt=01-05-2021",
+    dataType: "json",
+    success: function (result, status, xhr) {
+      make_line_chart(result.rejected_unique, "New Rejected Ballots per day")
+      make_line_chart(result.rejected_totals, "Total number of rejected ballots")
+      make_line_chart(result.cured_unique, "New cured ballots per day")
+      make_line_chart(result.cured_totals, "Total number of cured ballots")
+    },
+    error: function (xhr, status, error) {
+      // temp
+      make_line_chart(1, "New Rejected Ballots per day")
+      make_line_chart(1, "Total number of rejected ballots")
+      make_line_chart(1, "New cured ballots per day")
+      make_line_chart(1, "Total number of cured ballots")
+    }
+  });
+
 }
